@@ -14,4 +14,8 @@ class Caso {
     static constraints = {
         numAsunto unique:true
     }
+
+    static hasMany = [actuaciones: Actuacion]
+
+    String toString(){"${numAsunto}"}
 }

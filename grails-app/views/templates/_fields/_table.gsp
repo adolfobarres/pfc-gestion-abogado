@@ -20,8 +20,8 @@
                     <td><f:display bean="${bean}" property="${p.name}"  displayStyle="${displayStyle?:'table'}" /></td>
                 </g:else>
             </g:each>
-            <td><g:link contrpller="${controllerName}" action="edit" id="${bean.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-            <td><g:link contrpller="${controllerName}" action="delete" id="${bean.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
+            <td><g:link controller="${controllerName}" action="edit" id="${bean.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
+            <td><g:link controller="${controllerName}" action="delete" id="${bean.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
         </tr>
     </g:each>
     </tbody>

@@ -50,8 +50,8 @@
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
-                <h3></h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <g:link controller="actuacion" action="create" params="['idCaso':caso.id]" class="btn btn-default"><g:message code="actuacion.nueva.label"/></g:link>
+                <g:render template="layouts/listaActuaciones"/>
             </div>
             <div id="menu1" class="tab-pane fade">
                 <h3>Menu 1</h3>
