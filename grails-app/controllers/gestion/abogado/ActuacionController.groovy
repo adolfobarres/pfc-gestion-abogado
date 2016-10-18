@@ -38,11 +38,11 @@ class ActuacionController {
         }
 
         actuacion.save flush:true
-
+        println actuacion
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'actuacion.label', default: 'Actuacion'), actuacion.id])
-                redirect actuacion
+                redirect(controller:'caso', action:'show', id:actuacion.caso.id)
             }
             '*' { respond actuacion, [status: CREATED] }
         }

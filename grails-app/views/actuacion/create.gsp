@@ -6,31 +6,28 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-actuacion" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="create-actuacion" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+    <div class="row-fluid">
+        <div class="col-lg-6 col-lg-offset-3">
+            <h4><i class="fa fa-plus" aria-hidden="true"></i> <g:message code="default.create.label" args="[entityName]" /></h4>
+            <hr>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+            <div class="alert alert-info" role="status">${flash.message}</div>
             </g:if>
             <g:hasErrors bean="${this.actuacion}">
-            <ul class="errors" role="alert">
+            <ul class="alert alert-danger" role="alert">
                 <g:eachError bean="${this.actuacion}" var="error">
                 <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </ul>
             </g:hasErrors>
             <g:form action="save">
+                <input type="hidden" name="actuacion.caso.id" value="${params.idCaso}"/>
                 <fieldset class="form">
-                    <f:all bean="actuacion"/>
+                    <g:render template="form"/>
                 </fieldset>
+                <hr>
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <g:submitButton name="create" class="btn" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                 </fieldset>
             </g:form>
         </div>

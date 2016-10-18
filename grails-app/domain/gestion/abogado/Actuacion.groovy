@@ -1,9 +1,13 @@
 package gestion.abogado
 
-class Actuacion {
+import org.grails.databinding.BindingFormat
 
+class Actuacion {
+    @BindingFormat('yyyy-MM-dd')
     Date fechaAlta
+    @BindingFormat('yyyy-MM-dd')
     Date fechaVencimiento
+    @BindingFormat('yyyy-MM-dd')
     Date fechaFin
     EstadoActuacion estadoActuacion
     Prioridad prioridad
@@ -25,9 +29,12 @@ class Actuacion {
         if(fechaFin){
             "success"
         }else{
-            if(fechaVencimiento.compareTo(new Date())<0){
-                "danger"
+            if(fechaVencimiento){
+                if(fechaVencimiento.compareTo(new Date())<0){
+                    "danger"
+                }
             }
+
         }
 
     }
