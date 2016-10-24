@@ -70,8 +70,8 @@ class ActuacionController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'actuacion.label', default: 'Actuacion'), actuacion.id])
-                redirect actuacion
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'actuacion.label', default: 'Actuacion'), actuacion.descripcion])
+                redirect(controller:'caso', action:'show', id:actuacion.caso.id)
             }
             '*'{ respond actuacion, [status: OK] }
         }

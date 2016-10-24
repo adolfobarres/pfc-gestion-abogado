@@ -5,6 +5,11 @@
     <div class="panel-body">
 
         <div class="form-group">
+            <label for="fechaAlta"><g:message code="caso.fechaAlta"/> <span class="required-indicator">*</span></label>
+            <input type="date"  class="form-control input-sm" id="fechaAlta" name="caso.fechaAlta" required="" value="${formatDate(date:caso.fechaAlta,format:'yyyy-MM-dd')}" >
+        </div>
+
+        <div class="form-group">
             <label for="cliente"><g:message code="caso.cliente"/> <span class="required-indicator">*</span></label>
             <g:select name="caso.cliente.id"
                       from="${gestion.abogado.Cliente.list()}"
@@ -44,12 +49,6 @@
         <div class="form-group">
             <label for="juzgado"><g:message code="caso.juzgado"/> <span class="required-indicator">*</span></label>
             <input type="text"  class="form-control input-sm" id="juzgado" name="caso.juzgado" required="" value="${caso?.juzgado}" >
-        </div>
-
-
-        <div class="form-group">
-            <label for="fechaAlta"><g:message code="caso.fechaAlta"/> <span class="required-indicator">*</span></label>
-            <input type="date"  class="form-control input-sm" id="fechaAlta" name="caso.fechaAlta" required="" value="${caso?.fechaAlta}" >
         </div>
 
     </div>

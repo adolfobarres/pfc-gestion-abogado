@@ -17,5 +17,30 @@ class Caso {
 
     static hasMany = [actuaciones: Actuacion]
 
+    static transients = ['numActuacionesPendientes','estadoCaso']
+
     String toString(){"${numAsunto}"}
+
+    Integer getNumActuacionesPendientes(){
+        Integer numActuacionesPendientes = this.actuaciones.findAll{it.fechaFin != null}.size()
+        numActuacionesPendientes
+    }
+
+    String getEstadoCaso(){
+        if(this.actuaciones.size() == 0){
+            "default"
+        }
+        else{
+            if(this.numActuacionesPendientes == this.actuaciones.size()){
+                "success"
+            }
+            else if(this.numActuacionesPendientes == 0){
+                "danger"
+            }else{
+                "warning"
+            }
+        }
+
+    }
+
 }

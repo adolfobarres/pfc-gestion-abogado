@@ -7,7 +7,9 @@
 //
 //= require jquery-2.2.0.min
 //= require bootstrap/js/bootstrap
+//= require moment.min
 //= require datatables.min
+//= require datetime-moment
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
