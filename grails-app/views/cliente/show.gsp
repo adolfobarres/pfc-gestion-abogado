@@ -6,26 +6,33 @@
         <title><g:message code="default.show.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#show-cliente" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="show-cliente" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+    <div class="row-fluid">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="row">
+                <div class="col-lg-10">
+                    <h4><i class="fa fa-id-card-o" aria-hidden="true"></i> <g:message code="cliente.label"/>: ${cliente.nombre} ${cliente.apellidos}</h4>
+                </div>
+                <div class="col-lg-2" style="text-align: right;">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <g:link class="btn btn-default" title="${g.message(code:"default.edit.label",args:[entityName])}" action="edit" id="${cliente.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+                <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="cliente" />
-            <g:form resource="${this.cliente}" method="DELETE">
-                <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.cliente}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                </fieldset>
-            </g:form>
+
+            <g:render template="/cliente/layouts/infoCliente"/>
+
+            <div class="row">
+                <g:render template="/cliente/layouts/listaCasos" model="['cliente':cliente]"/>
+
+                <g:render template="/cliente/layouts/agenda" />
+            </div>
+
+
         </div>
+    </div>
     </body>
 </html>

@@ -5,10 +5,11 @@
 }
 
 .footer {
-    background-color: #2980b9;
+    border-top: 1px solid #c0c0c0;
+    background-color: #e3e3e3;
     padding: 0.3rem 2rem;
     text-align: center;
-    color: #fff;
+    color: #767676;
     width: 100%;
     bottom: 0;
     position: fixed;
@@ -49,7 +50,7 @@
 <footer class="footer">
     <div class="row full-width">
         <div class="small-12 medium-3 large-12 columns">
-            uLawyer
+            <strong>SIGAB</strong> - PFC Adolfo Barroso Espinosa - UCA
         </div>
 
     </div>

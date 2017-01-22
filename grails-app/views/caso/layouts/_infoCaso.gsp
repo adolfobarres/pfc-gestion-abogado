@@ -7,28 +7,28 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
-                        <strong><g:message code="caso.datos.numAsunto"></g:message></strong> ${caso?.numAsunto}
+                        <strong><g:message code="caso.numAsunto.label"/>:</strong> ${caso?.numAsunto}
                     </div>
                     <div class="col-lg-6">
-                        <strong><g:message code="caso.datos.fechaAlta"></g:message></strong>
+                        <strong><g:message code="caso.fechaAlta.label"/>:</strong>
                         <g:formatDate date="${caso?.fechaAlta}" />
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <strong><g:message code="caso.datos.tipoAsunto"/></strong>
+                        <strong><g:message code="caso.tipoAsunto.label"/>:</strong>
                         ${caso?.subtipoAsunto.tipoAsunto} - ${caso?.subtipoAsunto}
                     </div>
                     <div class="col-lg-6">
-                       <strong><g:message code="caso.datos.procedimiento"/></strong>
+                       <strong><g:message code="caso.procedimiento.label"/>:</strong>
                         ${caso?.procedimiento}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <strong><g:message code="caso.datos.cliente"></g:message></strong>
+                        <strong><g:message code="caso.cliente.label"/>:</strong>
                         <g:link controller="cliente" action="show" id="${caso.cliente.id}">${caso?.cliente}</g:link>
                     </div>
                 </div>
@@ -50,8 +50,23 @@
 
         <div class="tab-content">
             <div id="home" class="tab-pane fade in active">
-                <g:link controller="actuacion" action="create" params="['idCaso':caso.id]" class="btn btn-default"><g:message code="actuacion.nueva.label"/></g:link>
-                <g:render template="layouts/listaActuaciones"/>
+                <div class="row">
+                    <div class="col-lg-12" style="margin-top: 20px;">
+                        <div class="btn-group" role="group">
+                            <g:link controller="actuacion" action="create" params="['idCaso':caso.id]" class="btn btn-default"><i class="fa fa-plus"></i> <g:message code="actuacion.nueva.label"/></g:link>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-lg-12" >
+                        <g:render template="layouts/listaActuaciones"/>
+                    </div>
+                </div>
+
+
+
             </div>
             <div id="menu1" class="tab-pane fade">
                 <h3>Menu 1</h3>

@@ -8,21 +8,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <a class="navbar-brand" href="#">SIGAB</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:message code="clientes.label"/> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> <g:message code="clientes.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><g:link controller="cliente" action="index"><g:message code="clientes.lista"/></g:link></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><g:link controller="cliente" action="create"><g:message code="cliente.nuevo.label"/> </g:link></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><g:message code="casos.label"/> <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gavel" aria-hidden="true"></i> <g:message code="casos.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><g:link controller="caso" action="index"><g:message code="casos.lista"/></g:link></li>
                         <li><a href="#">Another action</a></li>

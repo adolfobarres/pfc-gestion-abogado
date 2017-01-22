@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped" id="tableList">
+<table class="table table-hover table-bordered table-striped" id="tableList">
     <thead>
     <tr>
         <g:each in="${domainProperties}" var="p" status="i">

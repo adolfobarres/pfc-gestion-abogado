@@ -97,6 +97,18 @@ class TipoAsuntoController {
         }
     }
 
+    def getSubtipos(Long tipoId){
+        TipoAsunto tipoAsunto = TipoAsunto.get(tipoId)
+        def subTipos = []
+        if(tipoAsunto != null){
+            subTipos = tipoAsunto.subtipos.sort{it.descripcion}
+        }
+
+        render template:  '/caso/layouts/subtiposAsunto', model: ['gspSubtipos':subTipos]
+        /*render g.select(id:'sutTipoId', name:'caso.subtipoAsunto.id',
+                from:subTipos, optionKey:'id', class:'form-control input-sm', required:"")*/
+    }
+
     protected void notFound() {
         request.withFormat {
             form multipartForm {

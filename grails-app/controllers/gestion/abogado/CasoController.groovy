@@ -11,8 +11,7 @@ class CasoController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Caso.list(params), model:[casoCount: Caso.count()]
+        respond Caso.list()
     }
 
     def show(Caso caso) {

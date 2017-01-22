@@ -2,13 +2,12 @@
 <html>
     <head>
         <meta name="layout" content="loginPage" />
-        <g:set var="entityName" value="${message(code: 'cliente.label', default: 'Cliente')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+        <title><g:message code="cliente.nuevo.label"/></title>
     </head>
     <body>
     <div class="row-fluid">
         <div class="col-lg-6 col-lg-offset-3">
-            <h4><i class="fa fa-plus" aria-hidden="true"></i> <g:message code="default.create.label" args="[entityName]" /></h4>
+            <h4><i class="fa fa-plus" aria-hidden="true"></i> <g:message code="cliente.nuevo.label"/></h4>
             <hr>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>

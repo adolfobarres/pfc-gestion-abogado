@@ -6,18 +6,23 @@
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
-    <div class="row-fluid">
+    <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <h4><g:message code="casos.lista" /></h4>
             <hr>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
+            <div class="row">
+                <div class="col-lg-12" >
+                    <div class="btn-group" role="group">
+                        <g:link controller="caso" action="create" class="btn btn-default"><i class="fa fa-plus"></i> <g:message code="caso.nuevo.label"/></g:link>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <g:render template="layouts/table" model="[casoList:casoList]"/>
 
-            <div class="pagination">
-                <g:paginate total="${casoCount ?: 0}" />
-            </div>
         </div>
         </div>
     </body>

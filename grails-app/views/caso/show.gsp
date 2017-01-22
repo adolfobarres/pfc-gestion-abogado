@@ -8,7 +8,16 @@
     <body>
     <div class="row-fluid">
         <div class="col-lg-10 col-lg-offset-1">
-            <h4><i class="fa fa-eye" aria-hidden="true"></i> <g:message code="default.show.label" args="[entityName]" /> ${caso.numAsunto}</h4>
+            <div class="row">
+                <div class="col-lg-10">
+                    <h4><i class="fa fa-eye" aria-hidden="true"></i> <g:message code="caso.label"/>: ${caso.numAsunto}</h4>
+                </div>
+                <div class="col-lg-2" style="text-align: right;">
+                    <div class="btn-group" role="group" aria-label="...">
+                        <g:link class="btn btn-default" title="${g.message(code:"default.edit.label",args:[entityName])}" action="edit" id="${caso.id}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link>
+                    </div>
+                </div>
+            </div>
             <hr>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>

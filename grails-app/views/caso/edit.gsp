@@ -27,7 +27,7 @@
                 </fieldset>
                 <hr>
                 <fieldset class="buttons">
-                    <input class="btn" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="btn btn-success" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

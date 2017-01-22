@@ -23,5 +23,7 @@ class Cliente {
 
     }
 
+    static hasMany = [casos:Caso]
+
     String toString(){"${nombre + " " + apellidos + " - " + nif}"}
 }

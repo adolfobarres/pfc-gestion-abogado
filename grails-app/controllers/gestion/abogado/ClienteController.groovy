@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 @Secured('ROLE_ADMIN')
 class ClienteController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
 
     def index(Integer max) {
        //params.max = Math.min(max ?: 10, 100)
@@ -88,14 +88,10 @@ class ClienteController {
 
         cliente.delete flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'cliente.label', default: 'Cliente'), cliente.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'cliente.label', default: 'Cliente'), cliente.id])
+        redirect action:"index", method:"GET"
         }
-    }
+
 
     protected void notFound() {
         request.withFormat {
