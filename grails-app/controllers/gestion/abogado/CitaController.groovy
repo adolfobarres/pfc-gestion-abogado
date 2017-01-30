@@ -1,6 +1,9 @@
 package gestion.abogado
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.converters.JSON
+
+import java.text.SimpleDateFormat
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -8,6 +11,8 @@ import grails.transaction.Transactional
 @Secured("ROLE_ADMIN")
 @Transactional(readOnly = true)
 class CitaController {
+
+    def CitaService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -33,6 +38,13 @@ class CitaController {
 
     @Transactional
     def save(Cita cita) {
+
+        cita.minutosComienzo = CitaService.getMinutos(params.horaSeleccionada)
+        cita.horaComienzo = CitaService.getHoras(params.horaSeleccionada)
+        cita.minutosFin = CitaService.getMinutos(params.horaFin)
+        cita.horaFin = CitaService.getHoras(params.horaFin)
+        cita.validate()
+
         if (cita == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -41,7 +53,7 @@ class CitaController {
 
         if (cita.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond cita.errors, view:'create'
+            respond cita.errors, view:'create', model:['cliente':Cliente.get(params.cita.cliente.id)]
             return
         }
 
@@ -113,5 +125,34 @@ class CitaController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def getHorasDisponibles(){
+
+        TipoCita vTipo
+        vTipo = TipoCita.get(params.tipoId)
+        String horaFinal
+
+        if(vTipo.duracionMediaHoras > 0){
+             horaFinal = CitaService.addHoras(params.hora,vTipo.duracionMediaHoras)
+        }
+        if(vTipo.duracionMediaMinutos){
+            horaFinal = CitaService.addMinutos(params.hora,vTipo.duracionMediaMinutos)
+        }
+
+        render template: 'layouts/horaFinalizacion', model:['horaFinal':horaFinal]
+    }
+
+    def listaCitasJSON() {
+        def vLista = Cita.list()
+        def listaEventos = []
+        def events
+
+        vLista.each { cita ->
+            listaEventos << ['title': cita.titulo, 'start': cita.fecha.format("YYYY-MM-dd")+"T"+cita.comienzo+"Z", 'end': cita.fecha.format("YYYY-MM-dd")+"T"+cita.fin+"Z"]
+        }
+
+        def json = ['events': listaEventos]
+        render listaEventos as JSON
     }
 }

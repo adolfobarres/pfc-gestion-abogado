@@ -20,6 +20,7 @@
     <asset:javascript src="DataTables/media/js/dataTables.bootstrap.min.js"/>
     <asset:javascript src="moments/moments.js"/>
     <asset:javascript src="fullcalendar/fullcalendar.min.js"/>
+    <asset:javascript src="fullcalendar/lang/es.js"/>
     <g:layoutHead/>
 
     <style>

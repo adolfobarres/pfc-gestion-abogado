@@ -1,5 +1,7 @@
 package gestion.abogado
 
+import org.grails.databinding.BindingFormat
+
 class Cita {
 
     String titulo
@@ -7,6 +9,7 @@ class Cita {
     Cliente cliente
     Caso caso
     String notas
+    @BindingFormat('dd-MM-yyyy')
     Date fecha
 
     Integer horaComienzo
