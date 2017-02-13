@@ -19,7 +19,7 @@ class Caso {
 
     static transients = ['numActuacionesPendientes','estadoCaso']
 
-    String toString(){"${numAsunto}"}
+    String toString(){"${numAsunto} - ${procedimiento}"}
 
     Integer getNumActuacionesPendientes(){
         Integer numActuacionesPendientes = this.actuaciones.findAll{it.fechaFin != null}.size()
