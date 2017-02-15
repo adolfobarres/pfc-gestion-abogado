@@ -3,19 +3,21 @@
     <div class="panel panel-info">
         <div class="panel-heading">
             <strong><i class="fa fa-calendar" aria-hidden="true"></i> <g:message
-                    code="cliente.asignar.cita"></g:message></strong>
+                    code="calendario.citas"></g:message></strong>
         </div>
 
         <div class="panel-body">
             <div class="row">
                 <div class="col-lg-12">
-                    <strong><g:message code="cliente.label"/>:</strong> ${cliente}
+                    <g:if test="${cliente}">
+                        <strong><g:message code="cliente.label"/>:</strong> ${cliente}
+                    </g:if>
+
                     <g:if test="${params.idCaso}">
                         <br>
                         <strong><g:message code="caso.label"/>:</strong> ${gestion.abogado.Caso.get(params.idCaso)}
                     </g:if>
 
-                    <hr>
                 </div>
             </div>
 

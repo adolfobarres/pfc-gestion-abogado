@@ -160,12 +160,17 @@ class CitaController {
         }
 
         def posibleHoraFinal = CitaService.intervaloLibre(params.hora,horaFinal,dia)
-        println posibleHoraFinal
+
+        def mensaje = ''
         if(posibleHoraFinal != ''){
+
+            if(posibleHoraFinal != horaFinal){
+                mensaje = "La hora final es anterior a la prevista, si decide continuar la cita se acortará"
+            }
             horaFinal = posibleHoraFinal
         }
 
-        render template: 'layouts/horaFinalizacion', model:['horaFinal':horaFinal]
+        render template: 'layouts/horaFinalizacion', model:['horaFinal':horaFinal,'gspMensaje':mensaje]
     }
 
     def listaCitasJSON() {

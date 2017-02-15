@@ -8,6 +8,7 @@
     <div class="row-fluid">
         <div class="col-lg-8 col-lg-offset-2">
             <h4><i class="fa fa-edit" aria-hidden="true"></i> <g:message code="cita.editar.label"/></h4>
+            <hr>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -23,8 +24,9 @@
                 <fieldset class="form">
                     <g:render template="layouts/formCita"/>
                 </fieldset>
+                <hr>
                 <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <input class="btn btn-success" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

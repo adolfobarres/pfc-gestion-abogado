@@ -1,3 +1,4 @@
+<%@ page import="gestion.abogado.Cliente" %>
 <script>
     function tipoCitaChanged(tipoId, dia, hora) {
         jQuery.ajax({
@@ -10,46 +11,75 @@
             }
         });
     }
+
+    function clienteChanged(idCliente) {
+        jQuery.ajax({
+            type: 'POST',
+            data: 'idCliente=' + idCliente,
+            url: '${createLink(action: 'getCasos',controller:'cliente')}',
+            success: function (data, textStatus) {
+                jQuery('#divCaso').html(data);
+            }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+
 </script>
 
 <g:if test="${params.dia}">
-    <input type="hidden" name="cita.fecha" id="diaSeleccionado" value="${params.dia}"/>
+  <g:set var="dia" value="${params.dia}"/>
+</g:if>
+<g:if test="${cita.fecha}">
+    <g:set var="dia" value="${g.formatDate(date:cita.fecha,format:"dd-MM-yyyy")}"/>
 </g:if>
 <g:if test="${params.hora}">
-    <input type="hidden" name="horaSeleccionada" id="horaSeleccionada" value="${params.hora}"/>
+   <g:set var="hora" value="${params.hora}"/>
+</g:if>
+<g:if test="${cita.id}">
+    <g:set var="hora" value="${cita.comienzo}"/>
+</g:if>
+<g:if test="${params.idCaso}">
+    <g:set var="idCaso" value="${params.idCaso}"/>
+</g:if>
+<g:if test="${cita.caso}">
+    <g:set var="idCaso" value="${cita.caso.id}"/>
+</g:if>
+<g:if test="${cliente}">
+    <g:set var="idCliente" value="${cliente.id}"/>
 </g:if>
 
-<input type="hidden" id="cliente" name="cita.cliente.id" value="${cliente.id}"/>
-<g:if test="${params.idCaso}">
-    <input type="hidden" id="caso" name="cita.caso.id" value="${params.idCaso.toLong()}"/>
-</g:if>
+<input type="hidden" name="cita.fecha" id="diaSeleccionado" value="${dia}"/>
+<input type="hidden" name="horaSeleccionada" id="horaSeleccionada" value="${hora}"/>
+
 
 <div class="row">
     <div class="col-lg-12">
         <div class="form-group">
             <label for="clienteNombre"><g:message code="cliente.label"/></label>
-            <input type="text" readonly="" id="clienteNombre" class="form-control" value="${cliente}"/>
+            <g:select id="clienteNombre" name='cita.cliente.id' value="${idCliente}"
+                      noSelection="${['':'--Selecciona un Cliente--']}"
+                      from='${gestion.abogado.Cliente.list().sort{it.nif}}' required=""
+                      optionKey="id" optionValue="nifYNombre" class="form-control" onChange="clienteChanged(this.value)"></g:select>
         </div>
     </div>
 </div>
-<g:if test="${params.idCaso}">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="form-group">
-                <label for="clienteNombre"><g:message code="caso.label"/></label>
-                <input type="text" readonly="" id="casoDesc" class="form-control"
-                       value="${gestion.abogado.Caso.get(params.idCaso)}"/>
-            </div>
-        </div>
-    </div>
-</g:if>
+
+
+<div id="divCaso">
+    <g:if test="${cliente}">
+
+
+
+                    <g:render template="layouts/cmbCasos" model="['gspCasos':gestion.abogado.Caso.get(idCaso).cliente.casos.sort{it.numAsunto},'gspIdCaso':idCaso]"/>
+    </g:if>
+</div>
 
 <div class="row">
     <div class="col-lg-6">
         <div class="form-group">
             <label for="diaCita"><g:message code="cita.dia.label"/></label>
-            <g:if test="${params.dia}">
-                <input type="text" readonly="" id="diaCita" class="form-control" value="${params.dia}"/>
+            <g:if test="${dia}">
+                <input type="text" readonly="" id="diaCita" class="form-control" value="${dia}"/>
             </g:if>
 
         </div>
@@ -58,8 +88,8 @@
     <div class="col-lg-6">
         <div class="form-group">
             <label for="horaInicio"><g:message code="cita.horaInicio.label"/></label>
-            <g:if test="${params.hora}">
-                <input type="text" readonly="" id="horaInicio" class="form-control" value="${params.hora}"/>
+            <g:if test="${hora}">
+                <input type="text" readonly="" id="horaInicio" class="form-control" value="${hora}"/>
             </g:if>
         </div>
     </div>
@@ -81,10 +111,11 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-6" id="divHoras">
+<div class="row" id="divHoras">
+    <g:if test="${cita.id}">
+        <g:render template="layouts/horaFinalizacion" model="['horaFinal':cita.fin,'gspMensaje':'']"/>
+    </g:if>
 
-    </div>
 </div>
 
 <div class="row">

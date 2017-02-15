@@ -92,6 +92,12 @@ class ClienteController {
         redirect action:"index", method:"GET"
         }
 
+    def getCasos(Long idCliente){
+        def vCasos = Cliente.get(idCliente)?.casos
+
+        render template:"/cita/layouts/cmbCasos", model:['gspCasos':vCasos]
+    }
+
 
     protected void notFound() {
         request.withFormat {

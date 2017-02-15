@@ -13,6 +13,7 @@
     width: 100%;
     bottom: 0;
     position: fixed;
+    z-index: 10;
 }
 
 .footer i {

@@ -23,7 +23,13 @@ class Cliente {
 
     }
 
+    static transients = ['nifYNombre']
+
     static hasMany = [casos:Caso]
 
     String toString(){"${nombre + " " + apellidos + " - " + nif}"}
+
+    String getNifYNombre(){
+        return nif + " - " + apellidos + ", " + nombre
+    }
 }
