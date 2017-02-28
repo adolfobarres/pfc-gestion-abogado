@@ -15,7 +15,7 @@ class Caso {
         numAsunto unique:true
     }
 
-    static hasMany = [actuaciones: Actuacion]
+    static hasMany = [actuaciones: Actuacion, facturas: Factura]
 
     static transients = ['numActuacionesPendientes','estadoCaso']
 

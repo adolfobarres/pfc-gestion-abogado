@@ -1,6 +1,7 @@
 ---
 server:
     'contextPath': '/gestion-abogados'
+    port: 8090
 
 hibernate:
     cache:

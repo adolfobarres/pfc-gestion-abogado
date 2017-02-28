@@ -45,7 +45,7 @@
             <li><a data-toggle="pill" href="#menu1">Ficheros <i class="fa fa-file-word-o" aria-hidden="true"></i></a> </li>
             <li><a data-toggle="pill" href="#menu2">Clientes <i class="fa fa-users" aria-hidden="true"></i></a></li>
             <li><a data-toggle="pill" href="#menu3">Citas <i class="fa fa-calendar" aria-hidden="true"></i></a> </li>
-            <li><a data-toggle="pill" href="#menu4">Facturación <i class="fa fa-money" aria-hidden="true"></i></i></a> </li>
+            <li><a data-toggle="pill" href="#menu4"><g:message code="facturacion.label"/> <i class="fa fa-money" aria-hidden="true"></i></i></a> </li>
         </ul>
 
         <div class="tab-content">
@@ -58,15 +58,11 @@
                     </div>
                 </div>
                 <hr>
-
                 <div class="row">
                     <div class="col-lg-12" >
                         <g:render template="layouts/listaActuaciones"/>
                     </div>
                 </div>
-
-
-
             </div>
             <div id="menu1" class="tab-pane fade">
                 <h3>Menu 1</h3>
@@ -80,8 +76,19 @@
                 <g:render template="layouts/listaCitasCaso"/>
             </div>
             <div id="menu4" class="tab-pane fade">
-                <h3>Menu 3</h3>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <div class="row">
+                    <div class="col-lg-12" style="margin-top: 20px;">
+                        <div class="btn-group" role="group">
+                            <g:link controller="factura" action="create" params="['idCaso':caso.id]" class="btn btn-default"><i class="fa fa-plus"></i> <g:message code="factura.nueva.label"/></g:link>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-12" >
+                        <g:render template="layouts/listaFacturas"/>
+                    </div>
+                </div>
             </div>
         </div>
 
