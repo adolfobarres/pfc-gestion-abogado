@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'factura.label', default: 'Factura')}" />
-        <title><g:message code="default.edit.label" args="[entityName]" /></title>
-    </head>
-    <body>
-        <a href="#edit-factura" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="edit-factura" class="content scaffold-edit" role="main">
-            <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
+<head>
+    <meta name="layout" content="loginPage" />
+    <g:set var="entityName" value="${message(code: 'factura.label', default: 'Factura')}" />
+    <title><g:message code="default.edit.label" args="[entityName]" /></title>
+</head>
+<body>
+<div class="row-fluid">
+    <div class="col-lg-6 col-lg-offset-3">
+        <h4><i class="fa fa-edit" aria-hidden="true"></i> <g:message code="default.edit.label" args="[entityName]" /></h4>
+        <hr>
+        <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${this.factura}">
-            <ul class="errors" role="alert">
+        </g:if>
+        <g:hasErrors bean="${this.factura}">
+            <ul class="alert alert-danger" role="alert">
                 <g:eachError bean="${this.factura}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                    <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </ul>
-            </g:hasErrors>
-            <g:form resource="${this.factura}" method="PUT">
-                <g:hiddenField name="version" value="${this.factura?.version}" />
-                <fieldset class="form">
-                    <f:all bean="factura"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                </fieldset>
-            </g:form>
-        </div>
-    </body>
+        </g:hasErrors>
+        <g:form action="update" method="PUT">
+            <fieldset class="form">
+                <g:hiddenField name="caso.id" value="${caso.id}"/>
+                <g:hiddenField name="id" value="${factura.id}"/>
+                <g:hiddenField name="version" value="${factura.version}"/>
+                <g:render template="form"/>
+            </fieldset>
+            <hr>
+            <fieldset class="buttons">
+                <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.update.label', default: 'Add Concept')}" />
+            </fieldset>
+        </g:form>
+    </div>
+</div>
+</body>
 </html>

@@ -1,6 +1,16 @@
 <div class="panel panel-info">
     <div class="panel-heading">
-        <h3 class="panel-title"><g:message code="factura.label"/>: <sgtrong>${factura.numero}</sgtrong></h3>
+        <h3 class="panel-title">
+            <div class="row">
+                <div class="col-lg-8">
+                    <g:message code="factura.label"/>: ${factura.numero}
+                </div>
+                <div class="col-lg-4" style="text-align: right;">
+                    <g:link controller="factura"  action="edit" id="${factura.id}" title="${g.message(code:"editar.factura.label")}"><i class="fa fa-edit"></i></g:link>
+                </div>
+            </div>
+
+        </h3>
     </div>
     <div class="panel-body">
         <div class="row">

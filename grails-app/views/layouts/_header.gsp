@@ -37,8 +37,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="facturacion.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><g:link controller="caso" action="index"><g:message code="casos.lista"/></g:link></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><g:link controller="factura" action="index"><g:message code="facturas.lista"/></g:link></li>
                     </ul>
                 </li>
                 <li class="dropdown">

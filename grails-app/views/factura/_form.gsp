@@ -11,6 +11,13 @@
     <g:set var="iva" value="${factura.iva}"/>
 </g:else>
 
+<g:if test="${factura.numero}">
+    <g:set var="numero" value="${factura.numero}"/>
+</g:if>
+<g:else>
+    <g:set var="numero" value="${numFactura}"/>
+</g:else>
+
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="factura.datos.principales"/></h3>
@@ -40,7 +47,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="numFactura"><g:message code="factura.numero.label"/> <span class="required-indicator">*</span></label>
-                    <input type="text"  class="form-control input-sm" id="numFactura" name="factura.numero" required="" value="${numFactura}" >
+                    <input type="text"  class="form-control input-sm" id="numFactura" name="factura.numero" required="" value="${numero}" >
                 </div>
             </div>
             <div class="col-lg-4">

@@ -67,8 +67,14 @@ class FacturaController {
         [factura: factura]
     }
 
+    def editConcepto(Long id){
+        ConceptoFactura conceptoFactura = ConceptoFactura.get(id)
+        Factura factura = conceptoFactura.factura
+        [factura:factura,concepto:conceptoFactura]
+    }
+
     def edit(Factura factura) {
-        respond factura
+        respond factura, model:['caso':factura.caso]
     }
 
     @Transactional
@@ -87,13 +93,9 @@ class FacturaController {
 
         factura.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'factura.label', default: 'Factura'), factura.id])
-                redirect factura
-            }
-            '*'{ respond factura, [status: OK] }
-        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'factura.label', default: 'Factura'), factura.id])
+        redirect action:"addConcepto", id:factura.id
     }
 
     @Transactional

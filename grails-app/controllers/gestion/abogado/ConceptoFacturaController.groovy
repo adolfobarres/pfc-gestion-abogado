@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class ConceptoFacturaController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -50,6 +50,8 @@ class ConceptoFacturaController {
 
     @Transactional
     def update(ConceptoFactura conceptoFactura) {
+
+        println params
         if (conceptoFactura == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -64,13 +66,8 @@ class ConceptoFacturaController {
 
         conceptoFactura.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'conceptoFactura.label', default: 'ConceptoFactura'), conceptoFactura.id])
-                redirect conceptoFactura
-            }
-            '*'{ respond conceptoFactura, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'conceptoFactura.label', default: 'ConceptoFactura'), conceptoFactura.id])
+        redirect controller: "factura", action: "addConcepto", id:conceptoFactura.factura.id
     }
 
     @Transactional
@@ -82,15 +79,12 @@ class ConceptoFacturaController {
             return
         }
 
+        Factura factura = conceptoFactura.factura
+
         conceptoFactura.delete flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'conceptoFactura.label', default: 'ConceptoFactura'), conceptoFactura.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'conceptoFactura.label', default: 'ConceptoFactura'), conceptoFactura.descripcion])
+        redirect action:"addConcepto", controller:"factura", id:factura.id
     }
 
     protected void notFound() {

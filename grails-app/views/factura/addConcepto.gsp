@@ -29,9 +29,12 @@
                 <input type="hidden" name="conceptoFactura.factura.id" value="${factura.id}"/>
                 <g:render template="/factura/layouts/formConcepto" />
             </fieldset>
-            <hr>
-            <fieldset class="buttons">
-                <g:submitButton name="create" class="btn" value="${message(code: 'default.button.addConceptos.label', default: 'Add Concept')}" />
+            <fieldset>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <button type="submit" class="btn btn-success"><g:message code="add.label"/></button>
+                    </div>
+                </div>
             </fieldset>
         </g:form>
     </div>

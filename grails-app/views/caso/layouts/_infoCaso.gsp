@@ -86,7 +86,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-lg-12" >
-                        <g:render template="layouts/listaFacturas"/>
+                        <g:render template="/factura/layouts/listaFacturas" model="['facturas':caso?.facturas]"/>
                     </div>
                 </div>
             </div>

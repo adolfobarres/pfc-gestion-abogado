@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-03-06T15:01:20 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="example2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2da5fd6-56e1-4f9b-869d-5b86dc550e50">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="gestion-abogado"/>
+	<queryString language="SQL">
+		<![CDATA[select * from factura]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="version" class="java.lang.Long"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="irpf" class="java.lang.Integer"/>
+	<field name="iva" class="java.lang.Integer"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="caso_id" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="30" uuid="8d168182-60a5-4cce-89be-30e45ee0b536"/>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="79" height="30" uuid="1bd948e7-be3f-45f3-a47d-b373da2ad35f"/>
+				<text><![CDATA[version]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="79" height="30" uuid="335b62ed-88c1-4156-bae2-65a08880ab24"/>
+				<text><![CDATA[fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="0" width="79" height="30" uuid="5f4bc332-eb7f-4159-9cb4-b126ba7be458"/>
+				<text><![CDATA[irpf]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="0" width="79" height="30" uuid="780d4772-019e-4189-aedf-c62b6da7fcdc"/>
+				<text><![CDATA[iva]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="0" width="79" height="30" uuid="743052a6-fbc4-4405-aade-7456a2471d2d"/>
+				<text><![CDATA[numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="0" width="79" height="30" uuid="27cef2e0-cdb2-4f25-89d9-0e7e14570491"/>
+				<text><![CDATA[caso_id]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="83" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="53" width="81" height="30" uuid="1d463621-51ac-4be1-aeef-5771eebb6c5c"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="53" width="79" height="30" uuid="c515b09e-8eea-420b-be8d-f1ebb7ad127c"/>
+				<textFieldExpression><![CDATA[$F{version}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="53" width="79" height="30" uuid="75b9dc0e-cfee-4d2a-b3ea-acd8f91fb117"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="53" width="79" height="30" uuid="02ef9fa3-1fa7-4424-b810-b585e06a4ba4"/>
+				<textFieldExpression><![CDATA[$F{irpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="318" y="53" width="79" height="30" uuid="55d6e70f-2a56-4f3c-9e3b-08d9d74ec7f0"/>
+				<textFieldExpression><![CDATA[$F{iva}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="397" y="53" width="79" height="30" uuid="d2a720db-a747-4741-8d15-abca71ed8a39"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="53" width="79" height="30" uuid="58429ae6-c609-40af-92f0-7666c6359988"/>
+				<textFieldExpression><![CDATA[$F{caso_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

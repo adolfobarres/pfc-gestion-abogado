@@ -63,6 +63,52 @@ dependencies {
     compile 'org.grails.plugins:spring-security-core:3.1.1'
     runtime 'mysql:mysql-connector-java:5.1.39'
     compile "org.grails.plugins:spring-security-ui:3.0.0.M2"
+    compile 'com.lowagie:itext:2.1.7'
+
+    compile('com.lowagie:itext:2.1.7')
+
+    compile('net.sf.jasperreports:jasperreports:6.3.1') {
+        exclude module: 'antlr'
+        exclude module: 'commons-logging'
+        exclude module: 'ant'
+        exclude module: 'mondrian'
+        exclude module: 'commons-javaflow'
+        exclude module: 'barbecue'
+        exclude module: 'xml-apis-ext'
+        exclude module: 'xml-apis'
+        exclude module: 'xalan'
+        exclude module: 'groovy-all'
+        exclude module: 'hibernate'
+        exclude module: 'saaj-api'
+        exclude module: 'servlet-api'
+        exclude module: 'xercesImpl'
+        exclude module: 'xmlParserAPIs'
+        exclude module: 'spring-core'
+        exclude module: 'bsh'
+        exclude module: 'spring-beans'
+        exclude module: 'jaxen'
+        exclude module: 'barcode4j'
+        exclude module: 'batik-svg-dom'
+        exclude module: 'batik-xml'
+        exclude module: 'batik-awt-util'
+        exclude module: 'batik-dom'
+        exclude module: 'batik-css'
+        exclude module: 'batik-gvt'
+        exclude module: 'batik-script'
+        exclude module: 'batik-svggen'
+        exclude module: 'batik-util'
+        exclude module: 'batik-bridge'
+        exclude module: 'persistence-api'
+        exclude module: 'jdtcore'
+        exclude module: 'bcmail-jdk16'
+        exclude module: 'bcprov-jdk16'
+        exclude module: 'bctsp-jdk16'
+        exclude module: 'bcmail-jdk14'
+        exclude module: 'bcprov-jdk14'
+        exclude module: 'bctsp-jdk14'
+        exclude module: 'xmlbeans'
+        exclude module: 'olap4j'
+    }
 }
 
 assets {

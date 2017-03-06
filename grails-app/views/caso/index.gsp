@@ -8,7 +8,7 @@
     <body>
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
-            <h4><g:message code="casos.lista" /></h4>
+            <h4><i class="fa fa-gavel" aria-hidden="true"></i> <g:message code="casos.lista" /></h4>
             <hr>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
