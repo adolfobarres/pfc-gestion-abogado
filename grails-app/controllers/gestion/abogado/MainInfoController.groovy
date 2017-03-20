@@ -40,13 +40,8 @@ class MainInfoController {
 
         mainInfo.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'mainInfo.label', default: 'MainInfo'), mainInfo.id])
-                redirect mainInfo
-            }
-            '*' { respond mainInfo, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'mainInfo.label', default: 'MainInfo'), mainInfo.id])
+        redirect action: 'edit', id:mainInfo.id
     }
 
     def edit(MainInfo mainInfo) {
@@ -63,19 +58,16 @@ class MainInfoController {
 
         if (mainInfo.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond mainInfo.errors, view:'edit'
+            respond mainInfo.errors, view: 'edit'
             return
         }
 
-        mainInfo.save flush:true
+        mainInfo.save flush: true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'mainInfo.label', default: 'MainInfo'), mainInfo.id])
-                redirect mainInfo
-            }
-            '*'{ respond mainInfo, [status: OK] }
-        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'mainInfo.label', default: 'MainInfo'), mainInfo.id])
+        redirect action: 'edit', id:mainInfo.id
+
     }
 
     @Transactional

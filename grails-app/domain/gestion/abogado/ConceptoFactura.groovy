@@ -4,8 +4,8 @@ class ConceptoFactura {
 
     String descripcion
     Float importe
-    Factura factura
 
+    static belongsTo = [factura:Factura]
     static constraints = {
     }
 }

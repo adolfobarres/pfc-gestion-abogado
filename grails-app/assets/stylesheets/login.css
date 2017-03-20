@@ -7,7 +7,7 @@
 body, html {
     height: 100%;
     background-repeat: no-repeat;
-    background-image: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));
+    background-image: linear-gradient(to bottom right,rgb(37, 55, 59), rgb(100, 140, 142));
 }
 
 .card-container.card {
@@ -43,13 +43,10 @@ body, html {
 }
 
 .profile-img-card {
-    width: 96px;
-    height: 96px;
+
     margin: 0 auto 10px;
     display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+
 }
 
 /*

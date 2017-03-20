@@ -8,7 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 class TipoProcedimientoController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -39,13 +39,8 @@ class TipoProcedimientoController {
 
         tipoProcedimiento.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), tipoProcedimiento.id])
-                redirect tipoProcedimiento
-            }
-            '*' { respond tipoProcedimiento, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), tipoProcedimiento.descripcion])
+        redirect action:'index'
     }
 
     def edit(TipoProcedimiento tipoProcedimiento) {
@@ -68,13 +63,9 @@ class TipoProcedimientoController {
 
         tipoProcedimiento.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), tipoProcedimiento.id])
-                redirect tipoProcedimiento
-            }
-            '*'{ respond tipoProcedimiento, [status: OK] }
-        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), tipoProcedimiento.descripcion])
+        redirect action:'index'
     }
 
     @Transactional
@@ -86,15 +77,17 @@ class TipoProcedimientoController {
             return
         }
 
-        tipoProcedimiento.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), tipoProcedimiento.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        try {
+            tipoProcedimiento.delete flush: true
         }
+        catch(org.springframework.dao.DataIntegrityViolationException e) {
+            notDeleted()
+            return
+        }
+
+
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), tipoProcedimiento.descripcion])
+        redirect action:"index", method:"GET"
     }
 
     protected void notFound() {
@@ -105,5 +98,10 @@ class TipoProcedimientoController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    protected void notDeleted() {
+                flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'tipoProcedimiento.label', default: 'TipoProcedimiento'), params.id])
+                redirect action: "index", method: "GET"
     }
 }

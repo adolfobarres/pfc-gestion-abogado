@@ -14,8 +14,8 @@ $(document).ready(function() {
 </script>
 
 
-<div class="col-lg-6">
-    <div class="panel panel-info">
+
+    <div class="panel panel-info" style="height:300px;overflow-y:auto;">
         <div class="panel-heading">
             <strong><i class="fa fa-calendar" aria-hidden="true"></i> <g:message code="citas.cliente.label"></g:message></strong>
         </div>
@@ -25,7 +25,6 @@ $(document).ready(function() {
             </div>
         </div>
         </div>
-</div>
 
 
 

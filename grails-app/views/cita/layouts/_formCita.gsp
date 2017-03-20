@@ -67,10 +67,15 @@
 
 <div id="divCaso">
     <g:if test="${cliente}">
+        <g:if test="${idCaso}">
+            <g:render template="layouts/cmbCasos" model="['gspCasos':gestion.abogado.Caso.get(idCaso).cliente.casos.sort{it.numAsunto},'gspIdCaso':idCaso]"/>
+        </g:if>
+        <g:else>
+            <g:if test="${idCliente}">
+                <g:render template="layouts/cmbCasos" model="['gspCasos':gestion.abogado.Cliente.get(idCliente).casos.sort{it.numAsunto}]"/>
+            </g:if>
+        </g:else>
 
-
-
-                    <g:render template="layouts/cmbCasos" model="['gspCasos':gestion.abogado.Caso.get(idCaso).cliente.casos.sort{it.numAsunto},'gspIdCaso':idCaso]"/>
     </g:if>
 </div>
 

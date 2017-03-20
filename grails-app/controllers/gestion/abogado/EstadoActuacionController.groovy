@@ -8,7 +8,7 @@ import grails.plugin.springsecurity.annotation.Secured
 @Transactional(readOnly = true)
 class EstadoActuacionController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -39,13 +39,9 @@ class EstadoActuacionController {
 
         estadoActuacion.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'estadoActuacion.label', default: 'EstadoActuacion'), estadoActuacion.id])
-                redirect estadoActuacion
-            }
-            '*' { respond estadoActuacion, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'estadoActuacion.label', default: 'EstadoActuacion'), estadoActuacion])
+        redirect action:'index'
+
     }
 
     def edit(EstadoActuacion estadoActuacion) {
@@ -68,13 +64,8 @@ class EstadoActuacionController {
 
         estadoActuacion.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'estadoActuacion.label', default: 'EstadoActuacion'), estadoActuacion.id])
-                redirect estadoActuacion
-            }
-            '*'{ respond estadoActuacion, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'estadoActuacion.label', default: 'EstadoActuacion'), estadoActuacion])
+        redirect action:'index'
     }
 
     @Transactional
@@ -85,16 +76,18 @@ class EstadoActuacionController {
             notFound()
             return
         }
-
-        estadoActuacion.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'estadoActuacion.label', default: 'EstadoActuacion'), estadoActuacion.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        try {
+            estadoActuacion.delete flush: true
         }
+        catch (org.springframework.dao.DataIntegrityViolationException e){
+            notDeleted()
+            return
+        }
+
+
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'estadoActuacion.label', default: 'EstadoActuacion'), estadoActuacion])
+        redirect action:"index", method:"GET"
+
     }
 
     protected void notFound() {
@@ -105,5 +98,10 @@ class EstadoActuacionController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    protected void notDeleted() {
+        flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'estadoActuacion.label', default: 'estadoActuacion'), params.id])
+        redirect action: "index", method: "GET"
     }
 }

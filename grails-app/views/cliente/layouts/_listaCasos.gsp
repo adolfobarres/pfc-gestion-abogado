@@ -1,6 +1,6 @@
 
-    <div class="col-lg-6">
-        <div class="panel panel-info">
+
+        <div class="panel panel-info" style="height:300px;overflow-y:auto;">
             <div class="panel-heading">
                 <strong><i class="fa fa-gavel" aria-hidden="true"></i> <g:message code="cliente.casos"></g:message></strong>
             </div>
@@ -23,4 +23,3 @@
             </div>
 
         </div>
-    </div>

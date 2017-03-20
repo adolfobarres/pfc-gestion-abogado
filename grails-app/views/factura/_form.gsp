@@ -75,5 +75,14 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-lg-4">
+                <label for="iva"><g:message code="factura.abonada.label"/></label>
+                <div class="input-group">
+                    <g:checkBox name="factura.abonada" value="${factura?.abonada}" />
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

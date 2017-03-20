@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="adminPage" />
         <g:set var="entityName" value="${message(code: 'prioridad.label', default: 'Prioridad')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <title><g:message code="lista.prioridades.label" /></title>
     </head>
     <body>
-        <a href="#list-prioridad" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-prioridad" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+    <ol class="breadcrumb">
+        <li><g:link controller="admin" action="dashboard">Admin</g:link></li>
+        <li><g:link controller="admin" action="dashboard"><g:message code="prioridad.label"/></g:link></li>
+        <li class="active"> <g:message code="lista.prioridades.label" /></li>
+    </ol>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+            <h4><i class="fa fa-list"></i> <g:message code="lista.prioridades.label" /></h4>
+            <hr>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
             <f:table collection="${prioridadList}" />
-
-            <div class="pagination">
-                <g:paginate total="${prioridadCount ?: 0}" />
-            </div>
+        </div>
         </div>
     </body>
 </html>

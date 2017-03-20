@@ -1,13 +1,14 @@
 import grails.plugin.springsecurity.annotation.Secured
-import net.sf.jasperreports.engine.JRDataSource
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
+
 import net.sf.jasperreports.engine.JasperPrint
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.JasperReport
+import net.sf.jasperreports.engine.JasperCompileManager
+import net.sf.jasperreports.engine.*
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import net.sf.jasperreports.engine.export.*
 import gestion.abogado.Factura;
+
+import gestion.abogado.MainInfo
 
 @Secured("ROLE_ADMIN")
 class ReportController {
@@ -16,59 +17,33 @@ class ReportController {
     def consultasService
 
     def printFactura(Long id){
-        String reportName, namaFile, dotJasper
-        namaFile = "factura"
-        reportName = grailsApplication.mainContext.getResource('reports/MyReports/' + namaFile + '.jrxml').file.getAbsoluteFile()
-        dotJasper  = grailsApplication.mainContext.getResource('reports/MyReports/' + namaFile + '.jasper').file.getAbsoluteFile()
-        Map<String, String> reportParams = new HashMap<String, String>()
 
-        def yourBeanCollection = consultasService.obtenerDatosFactura(id)
+        Factura factura = Factura.get(id)
 
-        JRDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(yourBeanCollection);
-        // compiles jrxml
-        JasperCompileManager.compileReportToFile(reportName);
-        // fills compiled report with parameters and a connection
-        JasperPrint jasperPrint = JasperFillManager.fillReport(dotJasper,reportParams, beanCollectionDataSource);
-        ByteArrayOutputStream  pdfStream = new ByteArrayOutputStream();
+        def datos = consultasService.obtenerDatosFactura(id)
+        def realPath = servletContext.getRealPath("/reports/MyReports/")
 
-        // exports report to pdf
-        JRExporter exporter = new JRPdfExporter();
-        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-        exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, pdfStream); // your output goes here
+        MainInfo infoGeneral = MainInfo.list().first()
 
-        exporter.exportReport();
-        render(file: pdfStream.toByteArray(), contentType: 'application/pdf')
+        params.iva = factura.iva.toFloat()
+        params.irpf = factura.irpf ? factura.irpf.toFloat() : 0.toFloat()
+        params.nombreCliente = factura.caso.cliente.nombre + " " + factura.caso.cliente.apellidos
+        params.cif = factura.caso.cliente.nif
+        params.ciudadDespacho = infoGeneral.direccion
+        params.domicilio = factura.caso.cliente.direccion
+        params.tituloDespacho = infoGeneral.tituloDespacho
+        params.nifDespacho = infoGeneral.cif
+        params.emailDespacho = infoGeneral.email
+
+
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(realPath+"/factura.jrxml");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JRBeanCollectionDataSource(datos));
+        response.contentType = "application/pdf"
+        response.setHeader("Content-disposition", "attachment;filename=factura_"+datos[0]['numero']+".pdf")
+        JasperExportManager.exportReportToPdfStream(jasperPrint,response.getOutputStream());
+
+
     }
 
-    def print() {
-        try {
-            String reportName, namaFile, dotJasper
-            namaFile = "factura"
-            reportName = grailsApplication.mainContext.getResource('reports/MyReports/' + namaFile + '.jrxml').file.getAbsoluteFile()
-            dotJasper = grailsApplication.mainContext.getResource('reports/MyReports/' + namaFile + '.jasper').file.getAbsoluteFile()
-            println reportName
-            // Report parameter
-            Map<String, String> reportParam = new HashMap<String, String>()
-
-            // compiles jrxml
-            JasperCompileManager.compileReportToFile(reportName);
-            // fills compiled report with parameters and a connection
-            JasperPrint print = JasperFillManager.fillReport(dotJasper, reportParam, dataSource.getConnection());
-            println print
-            ByteArrayOutputStream  pdfStream = new ByteArrayOutputStream();
-
-            // exports report to pdf
-            JRExporter exporter = new JRPdfExporter();
-            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, pdfStream); // your output goes here
-
-            exporter.exportReport();
-
-        } catch (Exception e) {
-
-            throw new RuntimeException("It's not possible to generate the pdf report.", e);
-        } finally {
-            render(file: pdfStream.toByteArray(), contentType: 'application/pdf')
-        }
-    }
 }

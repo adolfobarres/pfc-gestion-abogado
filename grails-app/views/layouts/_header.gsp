@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SIGAB</a>
+            <a class="navbar-brand" href="#"><g:img dir="images" file="logo-vertical.png" height="20px;" id="profile-img"/></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,6 +47,11 @@
                         <li><a href="#">Another action</a></li>
                     </ul>
                 </li>
+            </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li> <g:link controller="logout" ><i class="fa fa-user-circle-o" aria-hidden="true"></i> <sec:username/> (<g:message code="user.desconectar"/>) </g:link></li>
+            <li><g:link controller="admin" action="dashboard" style="color:#4280f4;text-decoration:underline;"> <i class="fa fa-cog" aria-hidden="true" ></i> Admin</g:link></li>
             </ul>
 
         </div><!-- /.navbar-collapse -->

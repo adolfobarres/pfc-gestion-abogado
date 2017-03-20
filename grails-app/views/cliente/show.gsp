@@ -26,9 +26,24 @@
             <g:render template="/cliente/layouts/infoCliente"/>
 
             <div class="row">
-                <g:render template="/cliente/layouts/listaCasos" model="['cliente':cliente]"/>
+                <div class="col-lg-6" >
+                    <g:render template="/cliente/layouts/listaCasos" model="['cliente':cliente]"/>
 
-                <g:render template="/cliente/layouts/agenda" />
+                </div>
+                <div class="col-lg-6">
+                    <g:render template="/cliente/layouts/agenda" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="margin-bottom:10px;">
+                            <strong><i class="fa fa-money" aria-hidden="true"></i> <g:message code="cliente.facturas"></g:message></strong>
+                        </div>
+
+                    <g:render template="/factura/layouts/listaFacturas" model="['facturas':cliente?.casos?.facturas.flatten()]"/>
+                    </div>
+                </div>
             </div>
 
 

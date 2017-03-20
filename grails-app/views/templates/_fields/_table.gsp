@@ -5,8 +5,8 @@
             <g:set var="propTitle">${domainClass.propertyName}.${p.name}.label</g:set>
             <g:sortableColumn property="${p.name}" title="${message(code: propTitle, default: p.naturalName)}" />
         </g:each>
-        <th></th>
-        <th></th>
+        <th style="width:10px;"></th>
+        <th style="width:10px;"></th>
     </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
                 </g:else>
             </g:each>
             <td><g:link controller="${controllerName}" action="edit" id="${bean.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-            <td><g:link controller="${controllerName}" action="delete" id="${bean.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
+            <td><g:link controller="${controllerName}" action="delete" id="${bean.id}" class="alert hollow button"  style="padding: 2px;" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
         </tr>
     </g:each>
     </tbody>

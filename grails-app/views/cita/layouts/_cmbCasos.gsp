@@ -5,5 +5,5 @@
             <g:select id="caso" name='cita.caso.id' value="${gspIdCaso}"
                       noSelection="${['': '--Selecciona un Caso--']}"
                       from='${gspCasos}'
-                      optionKey="id" class="form-control"></g:select>
+                      optionKey="id" class="form-control" required=""></g:select>
         </div></div></div>

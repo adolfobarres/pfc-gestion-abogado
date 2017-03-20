@@ -9,6 +9,7 @@
         <th><g:message code="factura.irpf.label"/></th>
         <th><g:message code="conceptoFactura.importe.label"/></th>
         <th><g:message code="conceptoFactura.importeconIva.label"/></th>
+        <th><g:message code="factura.abonada.label"/></th>
         <th></th>
         <th></th>
     </tr>
@@ -33,9 +34,16 @@
                 <td><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></td>
                 <td><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></td>
             </g:else>
-
-            <td><g:link controller="factura" action="edit" id="${factura.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-            <td><g:link controller="factura" action="delete" id="${factura.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
+            <td>
+                <g:if test="${factura?.abonada}">
+                    <i class='fa fa-check' aria-hidden='true' style="color:green;"></i>
+                </g:if>
+                <g:else>
+                    <i class="fa fa-times" aria-hidden="true" style="color:red;"></i>
+                </g:else>
+            </td>
+            <td><g:link controller="factura" action="edit" id="${factura.id}" class="hollow b1utton" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
+            <td><g:link controller="factura" action="delete" id="${factura.id}" class="alert hollow button"  style="padding: 2px;" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
         </tr>
 
     </g:each>
