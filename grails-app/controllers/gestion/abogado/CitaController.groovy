@@ -70,7 +70,15 @@ class CitaController {
         cita.save flush:true
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'cita.label', default: 'Cita'), cita.id])
-        redirect url: request.getHeader('referer')
+        if(cita.caso == null){
+            redirect action:'show', controller:'cliente', id:cita.cliente.id
+            return
+        }
+        else if(caso){
+            redirect action:'show', controller:'caso', id:cita.caso.id
+            return
+        }
+        //redirect url: request.getHeader('referer')
 
         /*request.withFormat {
             form multipartForm {
@@ -103,13 +111,8 @@ class CitaController {
 
         cita.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'cita.label', default: 'Cita'), cita.id])
-                redirect cita
-            }
-            '*'{ respond cita, [status: OK] }
-        }
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'cita.label', default: 'Cita'), cita.id])
+        redirect action:'create'
     }
 
     @Transactional
@@ -173,8 +176,18 @@ class CitaController {
         render template: 'layouts/horaFinalizacion', model:['horaFinal':horaFinal,'gspMensaje':mensaje]
     }
 
+    @Transactional
+    def markAsistencia(Long id){
+        Cita cita = Cita.get(id)
+        cita.realizada = true
+        cita.save(flush:true)
+
+        flash.message = message(code: 'cita.marcada.realizada')
+        redirect action: 'create'
+    }
+
     def listaCitasJSON() {
-        println params
+        //println params
         def vLista = Cita.list()
         def listaEventos = []
         def events
@@ -189,7 +202,8 @@ class CitaController {
         vLista.each { cita ->
             listaEventos << ['id':cita.id,'title': cita.titulo + ' ' + '['+cita.cliente.nif+']',
                              'start': cita.fecha.format("YYYY-MM-dd")+"T"+cita.comienzo+"Z",
-                               'end': cita.fecha.format("YYYY-MM-dd")+"T"+cita.fin+"Z"]
+                               'end': cita.fecha.format("YYYY-MM-dd")+"T"+cita.fin+"Z",
+                                'cliente': cita.cliente.id, 'realizada':cita.realizada?'Y':'N', 'color':cita.realizada?'green':'red']
         }
 
         def json = ['events': listaEventos]

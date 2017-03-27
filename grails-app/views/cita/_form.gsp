@@ -75,7 +75,16 @@
             },
 
             eventClick: function(calEvent, jsEvent, view) {
+                console.log(calEvent)
                 $('#linkBorrar').attr("href", "delete/"+calEvent.id)
+                $('#linkCliente').attr("href", "../cliente/show/"+calEvent.cliente)
+                if(calEvent.realizada == 'N'){
+                    $('#linkAsistida').show()
+                    $('#linkAsistida').attr("href", "markAsistencia/"+calEvent.id)
+                }
+                else{
+                    $('#linkAsistida').hide()
+                }
                 $('#linkEditar').attr("href", "edit/"+calEvent.id)
                 $('#modificarInfoCita').modal();
             }

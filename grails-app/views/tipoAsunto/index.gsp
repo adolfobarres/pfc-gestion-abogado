@@ -1,28 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="layout" content="main" />
+        <meta name="layout" content="adminPage" />
         <g:set var="entityName" value="${message(code: 'tipoAsunto.label', default: 'TipoAsunto')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#list-tipoAsunto" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="list-tipoAsunto" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
+        <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h4><i class="fa fa-list"></i> <g:message code="tipoasunto.list.label" /></h4>
+            <hr>
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${tipoAsuntoList}" />
+            <g:render template="layouts/table"/>
 
             <div class="pagination">
                 <g:paginate total="${tipoAsuntoCount ?: 0}" />
             </div>
+        </div>
         </div>
     </body>
 </html>
