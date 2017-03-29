@@ -150,6 +150,7 @@ class CitaController {
 
     def getHorasDisponibles(){
 
+        println params
         TipoCita vTipo
         vTipo = TipoCita.get(params.tipoId)
         String horaFinal
@@ -158,8 +159,8 @@ class CitaController {
         if(vTipo.duracionMediaHoras > 0){
              horaFinal = CitaService.addHoras(params.hora,vTipo.duracionMediaHoras)
         }
-        if(vTipo.duracionMediaMinutos){
-            horaFinal = CitaService.addMinutos(params.hora,vTipo.duracionMediaMinutos)
+        if(vTipo.duracionMediaMinutos > 0){
+            horaFinal = CitaService.addMinutos(horaFinal,vTipo.duracionMediaMinutos)
         }
 
         def posibleHoraFinal = CitaService.intervaloLibre(params.hora,horaFinal,dia)

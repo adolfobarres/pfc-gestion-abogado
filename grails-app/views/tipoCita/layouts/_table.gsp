@@ -1,34 +1,23 @@
 <table class="table table-bordered table-hover" id="tableList">
     <thead>
     <tr>
-        <th><g:message code="tipoDeAsunto.descripcion"/></th>
+        <th><g:message code="tipoCita.codigo"/></th>
+        <th><g:message code="tipoCita.descripcion"/></th>
+        <th><g:message code="tipoCita.duracionMediaHoras"/></th>
+        <th><g:message code="tipoCita.duracionMediaMinutos"/></th>
         <th style="width:10px;"></th>
         <th style="width:10px;"></th>
-        <th><g:message code="tipoDeAsunto.subtipos"/></th>
     </tr>
     </thead>
     <tbody>
-    <g:each var="tipo" in="${tipoAsuntoList}">
+    <g:each var="tipo" in="${tipoCitaList}">
         <tr>
+            <td>${tipo.codigo}</td>
             <td>${tipo.descripcion}</td>
+            <td>${tipo.duracionMediaHoras}</td>
+            <td>${tipo.duracionMediaMinutos}</td>
             <td><g:link controller="${controllerName}" action="edit" id="${tipo.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-            <td>
-                <g:if test="${tipo.subtipos.size()==0}">
-                    <g:link controller="${controllerName}" action="delete" id="${tipo.id}" class="alert hollow button"  style="padding: 2px;"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link>
-                </g:if>
-            </td>
-            <td>
-                <ul>
-                <g:each var="subtipo" in="${tipo.subtipos}">
-                    <li>${subtipo.descripcion} <g:link action="editSubtipo" id="${subtipo.id}"><i class="fa fa-edit"></i></g:link> </li>
-                </g:each>
-                    <li><g:link action="addSubTipo" id="${tipo.id}"><i class="fa fa-plus"></i> <g:message code="add.subtipo"/></g:link></li>
-                </ul>
-
-            </td>
-
-
+            <td><g:link controller="${controllerName}" action="delete" id="${tipo.id}" class="alert hollow button"  style="padding: 2px;" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
         </tr>
     </g:each>
     </tbody>

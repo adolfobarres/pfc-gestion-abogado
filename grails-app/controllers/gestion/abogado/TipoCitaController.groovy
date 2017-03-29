@@ -9,7 +9,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TipoCitaController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -40,13 +40,9 @@ class TipoCitaController {
 
         tipoCita.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'tipoCita.label', default: 'TipoCita'), tipoCita.id])
-                redirect tipoCita
-            }
-            '*' { respond tipoCita, [status: CREATED] }
-        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'tipoCita.label', default: 'TipoCita'), tipoCita.codigo])
+        redirect action:'index'
+
     }
 
     def edit(TipoCita tipoCita) {
@@ -69,13 +65,10 @@ class TipoCitaController {
 
         tipoCita.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'tipoCita.label', default: 'TipoCita'), tipoCita.id])
-                redirect tipoCita
-            }
-            '*'{ respond tipoCita, [status: OK] }
-        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'tipoCita.label', default: 'TipoCita'), tipoCita.codigo])
+        redirect action:'index'
+
     }
 
     @Transactional
@@ -87,7 +80,13 @@ class TipoCitaController {
             return
         }
 
-        tipoCita.delete flush:true
+        try {
+            tipoCita.delete flush:true
+        }
+        catch (org.springframework.dao.DataIntegrityViolationException e){
+            notDeleted()
+            return
+        }
 
         request.withFormat {
             form multipartForm {
@@ -106,5 +105,10 @@ class TipoCitaController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    protected void notDeleted() {
+        flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'tipoCita.label', default: 'Tipo de Cita'), params.id])
+        redirect action: 'index'
     }
 }

@@ -56,6 +56,15 @@
                      <li><g:link controller="prioridad" action="index"><i class="fa fa-search"></i> <g:message code="actuacion.prioridad.buscar.label"/></g:link> </li>
                  </ul>
              </div>
+
+             <div class="col-lg-3 card card-1 col-lg-offset-1 card-citas">
+                 <h3><i class="fa fa-calendar"></i> <g:message code="citas.label"/></h3>
+                 <hr>
+                 <ul  class="list-unstyled lista-dashboard">
+                     <li><g:link controller="tipoCita" action="create"><i class="fa fa-plus"></i> <g:message code="tipoCita.nuevo.label"/></g:link>
+                     <li><g:link controller="tipoCita" action="index"><i class="fa fa-search"></i> <g:message code="tipoCita.buscar.label"/></g:link> </li>
+                 </ul>
+             </div>
          </div>
 
      </div>

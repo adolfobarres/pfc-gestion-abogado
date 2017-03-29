@@ -136,8 +136,8 @@ class TipoAsuntoController {
 
         tipoAsunto.delete flush:true
 
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'tipoAsunto.label', default: 'TipoAsunto'), tipoAsunto.id])
-                redirect action:"index", method:"GET"
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'tipoAsunto.label', default: 'TipoAsunto'), tipoAsunto.id])
+        redirect action:"index", method:"GET"
     }
 
     def getSubtipos(Long tipoId){

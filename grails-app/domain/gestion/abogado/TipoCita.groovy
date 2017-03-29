@@ -8,6 +8,7 @@ class TipoCita {
     Integer duracionMediaMinutos
 
 
+
     static constraints = {
     }
 
