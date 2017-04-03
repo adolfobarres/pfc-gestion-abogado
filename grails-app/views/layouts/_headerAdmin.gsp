@@ -28,7 +28,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> <g:message code="usuarios.permisos.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><g:link controller="cita" action="create"><g:message code="citas.lista"/></g:link></li>
+                        <li><g:link controller="user" action="create"><i class="fa fa-plus"></i> <g:message code="user.nuevo"/></g:link> </li>
+                        <li><g:link controller="user" action="index"><i class="fa fa-search"></i> <g:message code="user.buscar"/></g:link> </li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -48,6 +49,14 @@
                         <li><g:link controller="estadoActuacion" action="index"><i class="fa fa-search"></i> <g:message code="actuacion.estado.buscar.label"/></g:link> </li>
                         <li><g:link controller="prioridad" action="create"><i class="fa fa-plus"></i> <g:message code="actuacion.prioridad.nuevo.label"/></g:link>
                         <li><g:link controller="prioridad" action="index"><i class="fa fa-search"></i> <g:message code="actuacion.prioridad.buscar.label"/></g:link> </li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar"></i> <g:message code="citas.label"/> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><g:link controller="tipoCita" action="create"><i class="fa fa-plus"></i> <g:message code="tipoCita.nuevo.label"/></g:link>
+                        <li><g:link controller="tipoCita" action="index"><i class="fa fa-search"></i> <g:message code="tipoCita.buscar.label"/></g:link> </li>
                     </ul>
                 </li>
             </ul>

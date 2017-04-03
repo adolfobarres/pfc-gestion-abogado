@@ -62,7 +62,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
     compile 'org.grails.plugins:spring-security-core:3.1.1'
     runtime 'mysql:mysql-connector-java:5.1.39'
-    compile "org.grails.plugins:spring-security-ui:3.0.0.M2"
+    //compile "org.grails.plugins:spring-security-ui:3.0.0.M2"
     compile 'com.lowagie:itext:2.1.7'
 
     compile('com.lowagie:itext:2.1.7')

@@ -1,7 +1,10 @@
 package gestion.abogado
+import com.spring.security.User
 import org.grails.databinding.BindingFormat
 
 class Caso {
+
+    def springSecurityService
 
     String numAsunto
     @BindingFormat('yyyy-MM-dd')
@@ -11,8 +14,14 @@ class Caso {
     Cliente cliente
     String juzgado
 
+    Date dateCreated
+    User addedBy
+    Date lastUpdated
+
     static constraints = {
         numAsunto unique:true
+        lastUpdated nullable: true
+        dateCreated nullable:true
     }
 
     static hasMany = [actuaciones: Actuacion, facturas: Factura]
@@ -20,6 +29,11 @@ class Caso {
     static transients = ['numActuacionesPendientes','estadoCaso']
 
     String toString(){"${numAsunto} - ${procedimiento}"}
+
+    def beforeValidate(){
+        println springSecurityService.currentUser
+        addedBy =  springSecurityService.currentUser
+    }
 
     Integer getNumActuacionesPendientes(){
         Integer numActuacionesPendientes = this.actuaciones.findAll{it.fechaFin != null}.size()

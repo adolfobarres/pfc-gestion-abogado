@@ -4,14 +4,23 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured('ROLE_ADMIN')
+@Secured(["ROLE_ADMIN","ROLE_ABOGADO"])
 @Transactional(readOnly = true)
 class CasoController {
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        respond Caso.list()
+
+        def user = springSecurityService.currentUser
+
+        if(user.authorities.any{ it.authority == "ROLE_ADMIN" }){
+            respond Caso.list()
+        }
+        else if(user.authorities.any{it.authority == "ROLE_ABOGADO"}){
+            respond Caso.findAllByAddedBy(user)
+        }
     }
 
     def show(Caso caso) {
@@ -19,15 +28,21 @@ class CasoController {
     }
 
     def create() {
-        respond new Caso(params)
+
+        String numAsunto = '1'.padLeft(6,'0')
+
+        def vCaso = Caso.list([max:1,sort:"id",order:"desc"])
+        if(vCaso){
+            Integer idCaso = vCaso.first().id + 1
+            numAsunto = idCaso.toString().padLeft(6,'0')
+        }
+
+        respond new Caso(params), model: ['numAsunto':'CA'+numAsunto]
     }
 
     @Transactional
     def save(Caso caso) {
-
-
-
-        if (caso == null) {
+         if (caso == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
@@ -35,12 +50,12 @@ class CasoController {
 
         if (caso.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond caso.errors, view:'create'
+            respond caso.errors, view:'create', model:["gspSubtipos":SubtipoAsunto.findAllByTipoAsunto(caso.subtipoAsunto.tipoAsunto)]
             return
         }
 
 
-        caso.save flush:true
+        caso.save flush:true, failOnError:true
 
         request.withFormat {
             form multipartForm {

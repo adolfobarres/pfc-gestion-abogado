@@ -7,6 +7,12 @@
     }
 </script>
 
+<g:if test="${caso.numAsunto}">
+    <g:set var="numero" value="${caso.numAsunto}"/>
+</g:if>
+<g:else>
+    <g:set var="numero" value="${numAsunto}"/>
+</g:else>
 
 <div class="panel panel-info">
     <div class="panel-heading">
@@ -31,7 +37,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="numAsunto"><g:message code="caso.numAsunto.label"/> <span class="required-indicator">*</span></label>
-                    <input type="text"  class="form-control input-sm" id="numAsunto" name="caso.numAsunto" required="" value="${caso?.numAsunto}" >
+                    <input type="text"  class="form-control input-sm" id="numAsunto" name="caso.numAsunto" required="" value="${numero}" >
                 </div>
             </div>
         </div>
@@ -69,7 +75,7 @@
                             <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':gestion.abogado.TipoAsunto.list().sort{it.descripcion}.first().subtipos]"/>
                         </g:if>
                         <g:else>
-                            <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':caso.subtipoAsunto.tipoAsunto.subtipos.sort{it.descripcion}]"/>
+                            <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':gspSubtipos]"/>
                         </g:else>
                     </div>
                 </div>

@@ -31,7 +31,7 @@
                  <hr>
                  <ul  class="list-unstyled lista-dashboard">
                      <li><g:link controller="user" action="create"><i class="fa fa-plus"></i> <g:message code="user.nuevo"/></g:link> </li>
-                     <li><g:link controller="user" action="search"><i class="fa fa-search"></i> <g:message code="user.buscar"/></g:link> </li>
+                     <li><g:link controller="user" action="index"><i class="fa fa-search"></i> <g:message code="user.buscar"/></g:link> </li>
                  </ul>
              </div>
              <div class="col-lg-3 col-lg-offset-1 card card-1 card-casos">
