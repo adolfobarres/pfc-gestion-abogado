@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="sigab.css"/>
+    <asset:stylesheet src="highcharts.css"/>
     <asset:stylesheet src="bootstrap/css/bootstrap.min.css"/>
     <asset:stylesheet src="DataTables/media/css/dataTables.bootstrap.min.css"/>
     <asset:stylesheet src="font-awesome/css/font-awesome.min.css"/>
@@ -21,6 +22,7 @@
     <asset:javascript src="moments/moments.js"/>
     <asset:javascript src="fullcalendar/fullcalendar.min.js"/>
     <asset:javascript src="fullcalendar/lang/es.js"/>
+    <asset:javascript src="highcharts/js/highcharts.js"/>
     <g:layoutHead/>
 
     <style>

@@ -74,7 +74,7 @@ class CitaController {
             redirect action:'show', controller:'cliente', id:cita.cliente.id
             return
         }
-        else if(caso){
+        else if(cita.caso){
             redirect action:'show', controller:'caso', id:cita.caso.id
             return
         }
@@ -153,7 +153,7 @@ class CitaController {
         println params
         TipoCita vTipo
         vTipo = TipoCita.get(params.tipoId)
-        String horaFinal
+        String horaFinal = params.hora
         Date dia  = Date.parse("dd-MM-yyyy",params.dia)
 
         if(vTipo.duracionMediaHoras > 0){

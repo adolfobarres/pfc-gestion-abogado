@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-        <a class="navbar-brand" href="#"><i class="fa fa-cog" aria-hidden="true" ></i> ADMIN</a>
+        <g:link class="navbar-brand" controller="admin" action="dashboard"><i class="fa fa-cog" aria-hidden="true" ></i> ADMIN</g:link>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -63,7 +63,7 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li> <g:link controller="logout" ><i class="fa fa-user-circle-o" aria-hidden="true"></i> <sec:username/> (<g:message code="user.desconectar"/>) </g:link></li>
-            <li><g:link controller="caso" action="index" style="color:#4280f4;text-decoration:underline;"> <i class="fa fa-home" aria-hidden="true" ></i> Home</g:link></li>
+            <li><g:link controller="main" action="dashboard" style="color:#4280f4;text-decoration:underline;"> <i class="fa fa-home" aria-hidden="true" ></i> Home</g:link></li>
             </ul>
 
         </div><!-- /.navbar-collapse -->

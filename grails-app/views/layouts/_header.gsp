@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><g:img dir="images" file="logo-vertical.png" height="20px;" id="profile-img"/></a>
+            <g:link controller="main" action="dashboard" class="navbar-brand" ><g:img dir="images" file="logo-vertical.png" height="20px;" id="profile-img"/></g:link>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
