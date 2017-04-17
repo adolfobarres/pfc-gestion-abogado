@@ -9,45 +9,44 @@
 
 
 <script>
-$(document).ready(function () {
+    $(function () {
+        Highcharts.setOptions({
 
-    // Build the chart
-    Highcharts.chart('grafica', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: ''
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true
+        });
+
+        $('#grafica').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.y}</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    colors: ['#ffcc00','#3399ff','#0059b3','#66ff66'],
+                    dataLabels: {
+                        enabled: true,
+                        color:'white',
+                        format: '{point.name}({point.y})',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    borderColor: '#bfbfbf'
                 }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Arendamiento',
-                y: 24.03
-            }, {
-                name: 'Diligencias previas',
-                y: 10.38
-            }, {
-                name: 'Medidas cautelares',
-                y: 4.77
+            },
+            series: [{
+                type: 'pie',
+                name: '<g:message code="tipoProcedimiento.label"/>',
+                data: <g:include controller="main" action="datosGraficaTartaProcedimientos"/>
             }]
-        }]
+        });
     });
-});
 </script>

@@ -1,6 +1,7 @@
 package gestion.abogado
 
-import org.grails.databinding.BindingFormat
+import grails.databinding.BindingFormat
+
 
 class Cita {
 

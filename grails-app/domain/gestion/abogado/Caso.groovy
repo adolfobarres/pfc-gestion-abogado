@@ -1,6 +1,6 @@
 package gestion.abogado
 import com.spring.security.User
-import org.grails.databinding.BindingFormat
+import grails.databinding.BindingFormat
 
 class Caso {
 
