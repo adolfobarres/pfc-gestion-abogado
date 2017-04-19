@@ -24,7 +24,7 @@ class Caso {
         dateCreated nullable:true
     }
 
-    static hasMany = [actuaciones: Actuacion, facturas: Factura]
+    static hasMany = [actuaciones: Actuacion, facturas: Factura, ficheros: Fichero]
 
     static transients = ['numActuacionesPendientes','estadoCaso']
 

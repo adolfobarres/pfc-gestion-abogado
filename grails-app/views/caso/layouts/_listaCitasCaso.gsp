@@ -1,5 +1,3 @@
-
-
 <div class="row">
    <div class="col-lg-12" style="margin-top: 20px;">
             <div class="btn-group" role="group">

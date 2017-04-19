@@ -1,0 +1,1 @@
+<g:link controller="fichero" action="addFichero" params="['idCaso':caso.id]"><g:message code="fichero.nuevo"/> </g:link>
