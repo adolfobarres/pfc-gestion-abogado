@@ -65,7 +65,18 @@
                 </div>
             </div>
             <div id="menu1" class="tab-pane fade">
+                <div class="row">
+                <div class="col-lg-12" style="margin-top: 20px;">
+                    <div class="btn-group" role="group">
+                        <g:link controller="fichero" action="addFichero" params="['idCaso':caso.id]" class="btn btn-default"><i class="fa fa-plus"></i> <g:message code="fichero.nuevo"/></g:link>
+                    </div>
+                </div>
+            </div>
+            <hr>
+                <div class="row">
+                    <div class="col-lg-12" >
                 <g:render template="layouts/listaFicheros"/>
+                        </div></div>
             </div>
             <div id="menu2" class="tab-pane fade">
                 <h3>Menu 2</h3>

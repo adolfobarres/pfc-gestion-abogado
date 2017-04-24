@@ -19,11 +19,12 @@
                 </g:eachError>
             </ul>
         </g:hasErrors>
-        <g:uploadForm name="myUpload">
+        <g:uploadForm name="myUpload" controller="fichero" action="upload">
             <g:render template="form"/>
+
         </g:uploadForm>
     </div>
-</div>
+    </div>
 </body>
 </html>
 

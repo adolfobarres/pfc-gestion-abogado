@@ -3,13 +3,15 @@ package com.alfresco
 import grails.transaction.Transactional
 import org.apache.chemistry.opencmis.client.api.CmisObject
 import org.apache.chemistry.opencmis.client.api.Folder
-import org.apache.chemistry.opencmis.client.api.Document
 import org.apache.chemistry.opencmis.client.api.OperationContext
 import org.apache.chemistry.opencmis.client.api.Session
-import org.apache.chemistry.opencmis.client.runtime.DocumentImpl
+import org.apache.chemistry.opencmis.client.runtime.FolderImpl
 import org.apache.chemistry.opencmis.client.util.OperationContextUtils
 import org.apache.chemistry.opencmis.commons.PropertyIds
 import org.apache.chemistry.opencmis.commons.data.ContentStream
+import org.apache.chemistry.opencmis.commons.enums.VersioningState
+import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl
+import org.springframework.web.multipart.MultipartFile
 
 import javax.swing.text.Document
 
@@ -17,35 +19,73 @@ import javax.swing.text.Document
 class AlfrescoContentService {
 
     def alfrescoConnectService
+    def rootPath = "/Sitios/abogado-y-tributos/documentlibrary"
 
-    Folder getRootFolder(Session session){
-        this.getFolderByPath("/Sitios/abogado-y-tributos",session)
+    String getRootPath(){
+        return rootPath
+    }
+
+    CmisObject  getRootFolder(Session session){
+        this.getFolderByPath(rootPath,session)
     }
 
 
-    Folder getFolderByPath(String path,Session session){
-        OperationContext oc = OperationContextUtils.createMaximumOperationContext();
-        Folder folder = (Folder) session.getObjectByPath(path,oc);
-
-        return folder
-    }
-
-    Folder createFolder(Folder parentFolder,String name){
-
-        Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put(PropertyIds.NAME, name);
-        properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:folder");
-
-        // create the folder
+    CmisObject getFolderByPath(String path,Session session){
         try{
-            Folder newFolder = parentFolder.createFolder(properties);
-            return newFolder
+            OperationContext oc = OperationContextUtils.createMaximumOperationContext();
+            CmisObject folder = session.getObjectByPath(path,oc);
+            return folder
         }
         catch(Exception e){
-            log.error("Imposible crear la carpeta")
             return null
         }
 
+    }
+
+    Folder createFolder(String path, String name, Session session){
+        def parentFolder = getFolderByPath(path, session)
+        if(parentFolder) {
+            Map<String, Object> properties = new HashMap<String, Object>();
+            properties.put(PropertyIds.NAME, name);
+            properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:folder");
+
+            // create the folder
+            try {
+                Folder newFolder = parentFolder.createFolder(properties);
+                return newFolder
+            }
+            catch (Exception e) {
+                log.error("Imposible crear la carpeta")
+                return null
+            }
+        }
+
+    }
+
+    def createDocument(def fichero, def description, def parentFolder){
+        try{
+            def mimetype = fichero.getContentType()
+            byte [] content=fichero.getBytes()
+            InputStream inputStream = new ByteArrayInputStream(content)
+            // properties
+            // (minimal set: name and object type id)
+            Map<String, Object> properties = new HashMap<String, Object>();
+            properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document");
+            properties.put(PropertyIds.NAME, fichero.getOriginalFilename());
+            if(description){
+                properties.put(PropertyIds.DESCRIPTION, description);
+            }
+            // content
+            ContentStream contentStream = new ContentStreamImpl(fichero.getOriginalFilename(), BigInteger.valueOf(content.length), mimetype, inputStream);
+
+            // create a major version
+            def newDoc = parentFolder.createDocument(properties, contentStream, VersioningState.MAJOR);
+            return newDoc
+        }
+        catch(Exception e){
+            println e
+            return null
+        }
     }
 
     def getDocument(String id, Session session){
@@ -84,6 +124,27 @@ class AlfrescoContentService {
             offset+=bufsize
         }
         response.outputStream.flush()
+    }
+
+    def createDocument(parent,String filename,String name,String description=null, Session session){
+        File f = new File(filename)
+
+        def is = new FileInputStream(f);
+
+        ContentStream contentStream = session.getObjectFactory().createContentStream(name,f.size(), mimetype, is);
+
+        def properties=[:]
+        properties.put(PropertyIds.OBJECT_TYPE_ID, "cmis:document,P:cm:titled");
+        properties.put(PropertyIds.NAME, name);
+        if (description) {
+            properties.put("cm:description",description);
+        }
+
+        Document doc = parentFolder.createDocument(properties, contentStream, VersioningState.NONE);
+        is.close();
+
+        return doc
+
     }
 
 }

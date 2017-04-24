@@ -31,7 +31,6 @@ class Caso {
     String toString(){"${numAsunto} - ${procedimiento}"}
 
     def beforeValidate(){
-        println springSecurityService.currentUser
         addedBy =  springSecurityService.currentUser
     }
 

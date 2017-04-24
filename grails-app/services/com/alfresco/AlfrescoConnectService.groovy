@@ -24,6 +24,7 @@ class AlfrescoConnectService {
         // connection settings
         parameters.put(SessionParameter.ATOMPUB_URL, "http://127.0.0.1:8080/alfresco/api/-default-/public/cmis/versions/1.1/atom");
         parameters.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+        //parameters.put(SessionParameter.OBJECT_FACTORY_CLASS, "org.alfresco.cmis.client.impl.AlfrescoObjectFactoryImpl");
         parameters.put(SessionParameter.REPOSITORY_ID, "-default-");
         // create session
         Session session = factory.createSession(parameters);
