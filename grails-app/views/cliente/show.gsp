@@ -46,6 +46,19 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="margin-bottom:10px;">
+                            <strong><i class="fa fa-money" aria-hidden="true"></i> <g:message code="cliente.facturas"></g:message></strong>
+                        </div>
+                        <div class="panel-body">
+                            <g:render template="/cliente/layouts/listaFicheros" model="['cliente':cliente]"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
         </div>
     </div>

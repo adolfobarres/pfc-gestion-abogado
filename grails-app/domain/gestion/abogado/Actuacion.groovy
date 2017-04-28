@@ -22,6 +22,8 @@ class Actuacion {
         fechaVencimiento nullable: true
     }
 
+    static hasMany = [ficheros:Fichero]
+
     static transients = ['clase']
 
     String toString(){"${descripcion}"}

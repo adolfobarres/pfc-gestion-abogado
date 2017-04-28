@@ -25,7 +25,7 @@ class Cliente {
 
     static transients = ['nifYNombre']
 
-    static hasMany = [casos:Caso]
+    static hasMany = [casos:Caso, ficheros:Fichero]
 
     String toString(){"${nombre + " " + apellidos + " - " + nif}"}
 

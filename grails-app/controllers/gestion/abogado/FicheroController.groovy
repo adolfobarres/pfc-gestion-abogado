@@ -2,6 +2,7 @@ package gestion.abogado
 
 import org.apache.chemistry.opencmis.client.api.CmisObject
 import org.apache.chemistry.opencmis.client.api.Document
+import org.apache.chemistry.opencmis.client.api.Folder
 import org.apache.chemistry.opencmis.client.api.Session
 import org.springframework.web.multipart.MultipartFile
 
@@ -10,25 +11,32 @@ class FicheroController {
     def alfrescoConnectService
     def alfrescoContentService
 
-    def addFichero() { }
+    def addFichero() {
+        if(params.idCaso){
+            ['actuaciones': Caso.get(params.idCaso).actuaciones.sort{it.descripcion}]
+        }
+    }
 
     def upload(){
         def vNombreCarpeta = ''
-        Caso caso =  Caso.get(params.idCaso)
-        if(params.idCaso){
-            vNombreCarpeta = caso.numAsunto
-        }
-
+        Caso caso =  null
+        Actuacion actuacion = null
+        Cliente cliente = null
+        Folder folder = null
         Session session = alfrescoConnectService.conectar()
-        String rootPath = alfrescoContentService.getRootPath()
-        String nombreCarpetaContenedoraCasos = rootPath+"/Casos/"
 
-        //Obtenemos primero la carpeta contenedora
-        CmisObject folder = alfrescoContentService.getFolderByPath(nombreCarpetaContenedoraCasos+vNombreCarpeta,session)
-
-        if(folder == null){
-            folder = alfrescoContentService.createFolder(nombreCarpetaContenedoraCasos,vNombreCarpeta,session)
+        if(params.idCliente){
+            cliente = Cliente.get(params.idCliente)
+            vNombreCarpeta = cliente.nif
         }
+        if(params.actuacion){
+            actuacion = Actuacion.get(params.actuacion)
+            vNombreCarpeta =  actuacion.caso.cliente.nif+"/"+actuacion.caso.numAsunto+"/"+actuacion.descripcion
+        } else if(params.idCaso){
+            caso = Caso.get(params.idCaso)
+            vNombreCarpeta = caso.cliente.nif+"/"+caso.numAsunto
+        }
+        folder = alfrescoContentService.createPath(vNombreCarpeta,session)
 
         //O se ha recuperado o se ha creado la carpeta para contener al fichero
         if(folder){
@@ -41,21 +49,29 @@ class FicheroController {
                     println "Imposible crear el tipo Fichero"
                 }
                 else{
-                    if(params.idCaso){
+                    if(params.actuacion){
+                        actuacion.addToFicheros(vFichero)
+                        actuacion.save(flush:true)
+                        redirect action:'show', controller:'caso', id:actuacion.caso.id
+                    }
+                    else if (params.idCaso){
                         caso.addToFicheros(vFichero)
                         caso.save(flush:true)
-                        flash.message = message(code: 'fichero.creado.con.exito')
+                        redirect action:'show', controller:'caso', id:caso.id
+                    }
+                    else if (params.idCliente){
+                        cliente.addToFicheros(vFichero)
+                        cliente.save(flush:true)
+                        redirect action:'show', controller:'cliente', id:cliente.id
                     }
                 }
+                flash.message = message(code: 'fichero.creado.con.exito')
             }
             else{
-                println "Imposible crear el documento"
+                flash.messageerror = message(code:"fichero.ya.existe")
             }
         }
 
-        if(params.idCaso){
-            redirect action:'show', controller:'caso', id:caso.id
-        }
     }
 
     def download(Long id){
@@ -67,6 +83,44 @@ class FicheroController {
     }
 
     def delete(Long id){
+        Fichero fichero = Fichero.get(id)
+        Caso caso = null
+        Actuacion actuacion = null
+        Cliente cliente = null
+
+        if(params.idCaso){
+            caso = Caso.get(params.idCaso)
+        }else if(params.idActuacion){
+            actuacion = Actuacion.get(params.idActuacion)
+        }else if(params.idCliente){
+            cliente = Cliente.get(params.idCliente)
+        }
+
+        if(fichero){
+            //borra el fichero en ALfresco
+            Session session =  alfrescoConnectService.conectar()
+            CmisObject fileAlfresco = session.getObject(fichero.idAlfresco)
+            if(fileAlfresco){
+                fileAlfresco.delete()
+            }
+            //Borra el fichero en SIGAB
+            if(params.idCaso){
+                caso.removeFromFicheros(fichero)
+            }
+            else if(params.idActuacion){
+                actuacion.removeFromFicheros(fichero)
+            }else if(params.idCliente){
+                cliente.removeFromFicheros(fichero)
+            }
+
+            fichero.delete(flush: true)
+
+        }
+        flash.message = message(code:"fichero.borrado.con.exito")
+        redirect(uri: request.getHeader('referer') )
+    }
+
+    def list(){
 
     }
 

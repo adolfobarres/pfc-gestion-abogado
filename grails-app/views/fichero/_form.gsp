@@ -1,3 +1,4 @@
+<%@ page import="gestion.abogado.Actuacion; gestion.abogado.Caso" %>
 
 <div class="panel panel-info">
     <div class="panel-heading">
@@ -11,6 +12,18 @@
                     <input type="text" class="form-control input-sm" id="nombre"  name="nombre" required="" value="${fichero?.nombre}"   >
                 </div>
             </div>
+            <g:if test="${params.idCaso}">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="actuacion"><g:message code="fichero.actuacion"/></label>
+                        <g:select name="actuacion"
+                                  id="actuacion"
+                                  from="${actuaciones}"
+                                  optionKey="id" noSelection="['':'--']"
+                                  class="form-control input-sm"/>
+                    </div>
+                </div>
+            </g:if>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -45,3 +58,6 @@
     <input type="hidden" name="idCaso" value="${params.idCaso}"/>
 </g:if>
 
+<g:if test="${params.idCliente}">
+    <input type="hidden" name="idCliente" value="${params.idCliente}"/>
+</g:if>

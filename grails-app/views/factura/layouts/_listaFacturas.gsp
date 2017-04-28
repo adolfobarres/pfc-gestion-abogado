@@ -43,7 +43,7 @@
                 </g:else>
             </td>
             <td><g:link controller="factura" action="edit" id="${factura.id}" class="hollow b1utton" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-            <td><g:link controller="factura" action="delete" id="${factura.id}" class="alert hollow button"  style="padding: 2px;" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
+            <td><g:link controller="factura" action="delete" id="${factura.id}" class="alert hollow button"  style="padding: 2px;color:red;" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
         </tr>
 
     </g:each>

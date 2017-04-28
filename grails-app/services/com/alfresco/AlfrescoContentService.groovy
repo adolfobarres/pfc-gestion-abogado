@@ -5,20 +5,17 @@ import org.apache.chemistry.opencmis.client.api.CmisObject
 import org.apache.chemistry.opencmis.client.api.Folder
 import org.apache.chemistry.opencmis.client.api.OperationContext
 import org.apache.chemistry.opencmis.client.api.Session
-import org.apache.chemistry.opencmis.client.runtime.FolderImpl
 import org.apache.chemistry.opencmis.client.util.OperationContextUtils
 import org.apache.chemistry.opencmis.commons.PropertyIds
 import org.apache.chemistry.opencmis.commons.data.ContentStream
 import org.apache.chemistry.opencmis.commons.enums.VersioningState
 import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl
-import org.springframework.web.multipart.MultipartFile
 
 import javax.swing.text.Document
 
 @Transactional
 class AlfrescoContentService {
 
-    def alfrescoConnectService
     def rootPath = "/Sitios/abogado-y-tributos/documentlibrary"
 
     String getRootPath(){
@@ -37,6 +34,7 @@ class AlfrescoContentService {
             return folder
         }
         catch(Exception e){
+            println e
             return null
         }
 
@@ -126,7 +124,7 @@ class AlfrescoContentService {
         response.outputStream.flush()
     }
 
-    def createDocument(parent,String filename,String name,String description=null, Session session){
+    /*def createDocument(parent,String filename,String name,String description=null, Session session){
         File f = new File(filename)
 
         def is = new FileInputStream(f);
@@ -144,7 +142,34 @@ class AlfrescoContentService {
         is.close();
 
         return doc
+    }*/
 
+
+    def createPath(String cmisPath, def session) {
+
+        def pathElements = cmisPath.split("/")
+
+        def parent = this.getFolderByPath(rootPath, session)
+        def path = rootPath
+        def pathAbuscar = path
+        pathElements.each { pathElement ->
+            if (pathElement.length() > 0) {
+                path = pathAbuscar
+                pathAbuscar = pathAbuscar + "/" + pathElement
+                //println "Path: " + path + ", PathAbuscar: " +pathAbuscar+ ", PathElement: " + pathElement
+                def entry = this.getFolderByPath(pathAbuscar, session)
+
+                if (!entry) {
+                    this.createFolder(path, pathElement, session)
+                    parent = this.getFolderByPath(pathAbuscar, session)
+                } else {
+                    parent = entry
+                }
+            }
+
+        }
+        return parent
     }
 
 }
+

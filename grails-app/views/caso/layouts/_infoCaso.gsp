@@ -40,7 +40,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a data-toggle="pill" href="#home"> Actuaciones <i class="fa fa-gavel" aria-hidden="true"></i></a></li>
             <li><a data-toggle="pill" href="#menu1">Ficheros <i class="fa fa-file-word-o" aria-hidden="true"></i></a> </li>
             <li><a data-toggle="pill" href="#menu2">Clientes <i class="fa fa-users" aria-hidden="true"></i></a></li>
