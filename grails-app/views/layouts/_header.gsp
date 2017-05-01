@@ -25,7 +25,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-gavel" aria-hidden="true"></i> <g:message code="casos.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><g:link controller="caso" action="index"><g:message code="casos.lista"/></g:link></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><g:link controller="caso" action="create"><g:message code="caso.nuevo.label"/></g:link></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -43,7 +43,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-word-o" aria-hidden="true"></i> <g:message code="documentos.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><g:link controller="caso" action="index"><g:message code="casos.lista"/></g:link></li>
+                        <li><g:link controller="fichero" action="list"><g:message code="documentos.lista"/></g:link></li>
                         <li><a href="#">Another action</a></li>
                     </ul>
                 </li>

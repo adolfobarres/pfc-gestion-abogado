@@ -1,9 +1,12 @@
 package com.alfresco
 
+import gestion.abogado.Fichero
 import grails.transaction.Transactional
 import org.apache.chemistry.opencmis.client.api.CmisObject
 import org.apache.chemistry.opencmis.client.api.Folder
+import org.apache.chemistry.opencmis.client.api.ItemIterable
 import org.apache.chemistry.opencmis.client.api.OperationContext
+import org.apache.chemistry.opencmis.client.api.QueryResult
 import org.apache.chemistry.opencmis.client.api.Session
 import org.apache.chemistry.opencmis.client.util.OperationContextUtils
 import org.apache.chemistry.opencmis.commons.PropertyIds
@@ -169,6 +172,25 @@ class AlfrescoContentService {
 
         }
         return parent
+    }
+
+    def findByContent(String cadena, Session session){
+
+        def listaFicheros = []
+
+        OperationContext oc = OperationContextUtils.createMinimumOperationContext("cmis:objectId", "cmis:name", "cmis:createdBy");
+        ItemIterable<CmisObject> results = session.queryObjects("cmis:document", " CONTAINS('"+cadena+"')", false, oc);
+
+        for (CmisObject cmisObject : results) {
+            def document =  cmisObject; // it can only be a folder
+            println document.id
+            Fichero fichero = Fichero.findByIdAlfresco(document.id)
+            if(fichero){
+                listaFicheros << fichero
+            }
+        }
+
+        return listaFicheros
     }
 
 }

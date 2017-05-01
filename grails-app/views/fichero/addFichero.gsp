@@ -12,9 +12,9 @@
         <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
         </g:if>
-        <g:hasErrors bean="${this.cliente}">
+        <g:hasErrors bean="${this.fichero}">
             <ul class="alert alert-danger" role="alert">
-                <g:eachError bean="${this.cliente}" var="error">
+                <g:eachError bean="${this.fichero}" var="error">
                     <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
                 </g:eachError>
             </ul>

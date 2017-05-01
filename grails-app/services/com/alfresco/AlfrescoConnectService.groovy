@@ -16,15 +16,12 @@ class AlfrescoConnectService {
         // default factory implementation
         SessionFactory factory = SessionFactoryImpl.newInstance();
         Map<String, String> parameters = new HashMap<String, String>();
-
         // user credentials
         parameters.put(SessionParameter.USER, "admin");
         parameters.put(SessionParameter.PASSWORD, "mpchsup206");
-
         // connection settings
         parameters.put(SessionParameter.ATOMPUB_URL, "http://127.0.0.1:8080/alfresco/api/-default-/public/cmis/versions/1.1/atom");
         parameters.put(SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
-        //parameters.put(SessionParameter.OBJECT_FACTORY_CLASS, "org.alfresco.cmis.client.impl.AlfrescoObjectFactoryImpl");
         parameters.put(SessionParameter.REPOSITORY_ID, "-default-");
         // create session
         Session session = factory.createSession(parameters);

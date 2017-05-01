@@ -121,7 +121,41 @@ class FicheroController {
     }
 
     def list(){
+        ['ficheros':null]
+    }
+
+    def displayThumbnail(Long id){
+        Fichero fichero = Fichero.get(id)
+        def thumbnail = fichero.thumbnail
+        if(fichero.thumbnail != null){
+            OutputStream out = response.getOutputStream();
+            response.setContentType("application/png")
+            out.write(thumbnail)
+            out.flush()
+            out.close()
+        }
+        return
 
     }
+
+    def busquedaContenido(){
+        def result
+        if(params.contenido) {
+            Session session = alfrescoConnectService.conectar()
+            result = alfrescoContentService.findByContent(params.contenido, session)
+        }
+        render view:'list', model:['ficheros':result]
+
+    }
+
+    def busqueda(){
+
+        //TO-DO usar la vista v_lista_ficheros y realizar las búsquedas
+        //Crear la vista al cargar la app
+        render view:'list', model:['ficheros':result]
+    }
+
+
+
 
 }
