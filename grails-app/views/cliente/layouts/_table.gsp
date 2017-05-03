@@ -22,7 +22,7 @@
             <td>
                 <g:if test="${cliente.casos.size()==0}">
                     <g:link controller="${controllerName}" action="delete" id="${cliente.id}" class="alert hollow button"  style="padding: 2px;"
-                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true"></i></g:link>
+                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></g:link>
                 </g:if>
              </td>
 
@@ -38,7 +38,7 @@
         $.fn.dataTable.moment( 'DD-MM-YYYY' );
 
         $('#tableList').DataTable({
-            "order": [[ 1, "desc" ]],
+            "order": [[ 1, "asc" ]],
             language: {
                 "sProcessing":     "Procesando...",
                 "sLengthMenu":     "Mostrar _MENU_ registros",

@@ -14,18 +14,40 @@
     <g:set var="numero" value="${numAsunto}"/>
 </g:else>
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-user" aria-hidden="true"></i> <g:message code="caso.datos.principales"/></h3>
+        <h3 class="panel-title"><i class="fa fa-circle-o" aria-hidden="true"></i> <g:message code="caso.datos.principales"/></h3>
     </div>
     <div class="panel-body">
 
         <g:if test="${actionName == 'create'}">
             <g:set var="fecha" value="${new Date()}"/>
         </g:if>
-        <g:elseif test="${actionName == 'edit'}">
+        <g:elseif test="${actionName == 'edit' || actionName=='save'}">
             <g:set var="fecha" value="${caso.fechaAlta}"/>
         </g:elseif>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label for="cliente"><g:message code="caso.cliente.label"/> <span class="required-indicator">*</span></label>
+                    <g:if test="${params.idCliente}">
+                        <g:select name="caso.cliente.id"
+                                  from="${gestion.abogado.Cliente.list()}"
+                                  value="${params.idCliente}"
+                                  optionKey="id"  class="form-control input-sm" readonly="" id="cliente"/>
+                    </g:if>
+                    <g:else>
+
+                            <g:select name="caso.cliente.id"
+                                      from="${gestion.abogado.Cliente.list()}"
+                                      value="${caso?.cliente?.id}"
+                                      optionKey="id"  class="form-control input-sm" id="cliente"/>
+
+                    </g:else>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-4">
@@ -42,17 +64,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="form-group">
-                    <label for="cliente"><g:message code="caso.cliente.label"/> <span class="required-indicator">*</span></label>
-                    <g:select name="caso.cliente.id"
-                              from="${gestion.abogado.Cliente.list()}"
-                              value="${caso?.cliente?.id}"
-                              optionKey="id"  class="form-control input-sm" />
-                </div>
-            </div>
-        </div>
+
 
         <hr>
 
@@ -64,18 +76,18 @@
                               from="${gestion.abogado.TipoAsunto.list().sort{it.descripcion}}"
                               value="${caso?.subtipoAsunto?.tipoAsunto?.id}"
                               optionKey="id"  class="form-control input-sm"
-                              onchange="tipoAsuntoChanged(this.value);"  required=""/>
+                              onchange="tipoAsuntoChanged(this.value);"  required="" id="tipoAsunto"/>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="subtipoAsunto"><g:message code="caso.tipoAsunto.label"/> <span class="required-indicator">*</span></label>
+                    <label for="subtipoAsunto"><g:message code="caso.tipoAsunto.subtipo.label"/> <span class="required-indicator">*</span></label>
                     <div id="divSubtipos">
                         <g:if test="${actionName == 'create'}">
-                            <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':gestion.abogado.TipoAsunto.list().sort{it.descripcion}.first().subtipos]"/>
+                            <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':gestion.abogado.TipoAsunto.list().sort{it.descripcion}.first().subtipos]" id="subtipoAsunto"/>
                         </g:if>
                         <g:else>
-                            <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':gspSubtipos]"/>
+                            <g:render template="layouts/subtiposAsunto" model="['gspSubtipos':gspSubtipos]" id="subtipoAsunto"/>
                         </g:else>
                     </div>
                 </div>
@@ -90,13 +102,13 @@
                     <g:select name="caso.procedimiento.id"
                               from="${gestion.abogado.TipoProcedimiento.list()}"
                               value="${caso?.procedimiento?.id}"
-                              optionKey="id"  class="form-control input-sm" />
+                              optionKey="id"  class="form-control input-sm" id="tipoProcedimiento"/>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="juzgado"><g:message code="caso.juzgado.label"/> <span class="required-indicator">*</span></label>
-                    <input type="text"  class="form-control input-sm" id="juzgado" name="caso.juzgado" required="" value="${caso?.juzgado}" >
+                    <label for="juzgado"><g:message code="caso.juzgado.label"/></label>
+                    <input type="text"  class="form-control input-sm" id="juzgado" name="caso.juzgado"  value="${caso?.juzgado}" >
                 </div>
             </div>
         </div>

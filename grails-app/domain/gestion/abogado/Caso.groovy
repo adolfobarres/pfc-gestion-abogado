@@ -22,9 +22,10 @@ class Caso {
         numAsunto unique:true
         lastUpdated nullable: true
         dateCreated nullable:true
+        juzgado nullable:true
     }
 
-    static hasMany = [actuaciones: Actuacion, facturas: Factura, ficheros: Fichero]
+    static hasMany = [actuaciones: Actuacion, facturas: Factura, ficheros: Fichero, citas:Cita]
 
     static transients = ['numActuacionesPendientes','estadoCaso']
 

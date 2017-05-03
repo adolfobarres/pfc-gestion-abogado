@@ -23,4 +23,19 @@ class ConsultasService {
         def rows = sql.rows(query)
         return rows
     }
+
+    def obtenerIdFicheros(def params){
+        String query = "select id_alfresco from v_lista_ficheros where 1 = 1"
+        if(params.dni){
+            query += " and DNI like \"%"+params.dni+"%\""
+        }
+        if(params.caso){
+            query += " and caso like \"%"+params.caso+"%\""
+        }
+
+
+        def sql = new Sql(dataSource)
+        def rows = sql.rows(query)
+        return rows
+    }
 }

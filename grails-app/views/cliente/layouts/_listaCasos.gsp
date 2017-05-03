@@ -1,13 +1,12 @@
 
 
-        <div class="panel panel-info" style="height:400px;overflow-y:auto;">
+        <div class="panel panel-primary">
             <div class="panel-heading">
-                <strong><i class="fa fa-gavel" aria-hidden="true"></i> <g:message code="cliente.casos"></g:message></strong>
+                <i class="fa fa-gavel" aria-hidden="true"></i> <g:message code="cliente.casos"></g:message>
             </div>
 
-            <div class="panel-body">
-                <g:link action="create" controller="caso" params="['idCliente':cliente.id]" class="btn btn-default"><g:message code="caso.nuevo.label"/></g:link>
-                <hr>
+            <div class="panel-body"  style="height:300px;overflow-y:auto;">
+
                 <table class="table table-bordered table-hover">
                     <tbody>
                     <g:each var="caso" in="${cliente?.casos}">
@@ -23,5 +22,6 @@
                     </tbody>
                 </table>
             </div>
+            <div class="panel-footer" style="text-align: right;"><g:link action="create" controller="caso" params="['idCliente':cliente.id]" class="btn btn-default btn-sm" ><i class="fa fa-plus"></i> <g:message code="caso.nuevo.label"/></g:link></div>
 
         </div>

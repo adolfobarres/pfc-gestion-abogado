@@ -3,7 +3,7 @@
     <head>
         <meta name="layout" content="loginPage" />
         <g:set var="entityName" value="${message(code: 'cliente.label', default: 'Cliente')}" />
-        <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <title><g:message code="clientes.lista" /> </title>
     </head>
     <body>
 

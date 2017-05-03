@@ -19,7 +19,7 @@ class Cita {
     Integer horaFin
     Integer minutosFin
 
-    Boolean realizada
+    Boolean realizada = false
 
     static transients = ['comienzo', 'fin']
 

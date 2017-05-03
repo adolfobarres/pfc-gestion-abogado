@@ -23,7 +23,11 @@
         <div class="row">
             <g:render template="layouts/busqueda"></g:render>
         </div>
-        <div class="row">
+        <div class="row" id="spinner" style="display: none; text-align:center;">
+            <h2>Buscando ficheros</h2>
+            <g:img dir="images" file="spinner.gif" height="60" />
+        </div>
+        <div class="row" id="divResultado">
             <g:render template="layouts/tablaFicheros"></g:render>
         </div>
 

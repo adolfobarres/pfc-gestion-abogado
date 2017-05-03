@@ -1,5 +1,5 @@
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-user" aria-hidden="true"></i> <g:message code="clientes.datos.personales"/></h3>
     </div>
@@ -8,7 +8,7 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="nif"><g:message code="clientes.nif"/> <span class="required-indicator">*</span></label>
-                    <input type="text" class="form-control input-sm" id="nif"  name="nif" required="" value="${cliente?.nif}"   >
+                    <input type="text" class="form-control input-sm" id="nif"  name="nif" required="" value="${cliente?.nif}" minlength="9" maxlength="9">
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
 
 
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-at" aria-hidden="true"></i> <g:message code="clientes.contacto"/></h3>
     </div>
@@ -40,8 +40,8 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="form-group">
-                    <label for="email"><g:message code="clientes.email"/> <span class="required-indicator">*</span></label>
-                    <input type="email" class="form-control input-sm" id="email"  name="email" required="" value="${cliente?.email}">
+                    <label for="email"><g:message code="clientes.email"/> </label>
+                    <input type="email" class="form-control input-sm" id="email"  name="email"  value="${cliente?.email}">
                 </div>
             </div>
         </div>
@@ -49,13 +49,13 @@
             <div class="col-lg-4">
                 <div class="form-group">
                     <label for="telefono"><g:message code="clientes.telefono"/> <span class="required-indicator">*</span></label>
-                    <input type="text" class="form-control input-sm" id="telefono"  name="telefono" required="" value="${cliente?.telefono}">
+                    <input type="text" class="form-control input-sm" id="telefono"  name="telefono" required="" value="${cliente?.telefono}" minlength="9" maxlength="9">
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label for="movil"><g:message code="clientes.movil"/> <span class="required-indicator">*</span></label>
-                    <input type="text" class="form-control input-sm" id="movil"  name="movil" required="" value="${cliente?.movil}">
+                    <label for="movil"><g:message code="clientes.movil"/> </label>
+                    <input type="text" class="form-control input-sm" id="movil"  name="movil"  value="${cliente?.movil}">
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
 </div>
 
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-home" aria-hidden="true"></i> <g:message code="clientes.direccion"/></h3>
     </div>

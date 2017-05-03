@@ -13,7 +13,6 @@ import gestion.abogado.MainInfo
 @Secured("ROLE_ADMIN")
 class ReportController {
 
-    def dataSource
     def consultasService
 
     def printFactura(Long id){

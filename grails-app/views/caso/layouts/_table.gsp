@@ -22,7 +22,7 @@
                 <td>${caso?.cliente}</td>
                 <td style="text-align: center;"><span class="label label-${caso.estadoCaso}">${caso?.numActuacionesPendientes} / ${caso?.actuaciones.size()}</span></td>
                 <td><g:link controller="${controllerName}" action="edit" id="${caso.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-                <td><g:link controller="${controllerName}" action="delete" id="${caso.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
+                <td><g:link controller="${controllerName}" action="delete" id="${caso.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true" style="color:red" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"></i></g:link></td>
             </tr>
         </g:each>
     </tbody>

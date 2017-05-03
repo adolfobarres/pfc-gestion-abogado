@@ -3,6 +3,7 @@
     margin: 0;
     font-size:14pt;
 }
+
 </style>
 
 <script>
@@ -27,17 +28,17 @@ $(document).ready(function() {
 
 
 
-    <div class="panel panel-info" style="height:400px;overflow-y:auto;">
+    <div class="panel panel-primary">
         <div class="panel-heading">
-            <strong><i class="fa fa-calendar" aria-hidden="true"></i> <g:message code="citas.cliente.label"></g:message></strong>
+            <i class="fa fa-calendar" aria-hidden="true"></i> <g:message code="citas.cliente.label"></g:message>
         </div>
-        <div class="panel-body">
-            <g:link class="btn btn-default" controller="cita" action="create" params="['idCliente':cliente.id]"><g:message code="cita.nuevo.label"/></g:link>
-            <hr>
+        <div class="panel-body" style="height:300px;overflow-y:auto;">
+
             <div id="calendar">
 
             </div>
         </div>
+        <div class="panel-footer" style="text-align: right;"><g:link class="btn btn-default btn-sm" controller="cita" action="create" params="['idCliente':cliente.id]"><i class="fa fa-plus"></i> <g:message code="cita.nuevo.label"/></g:link></div>
         </div>
 
 

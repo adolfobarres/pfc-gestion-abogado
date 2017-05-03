@@ -7,7 +7,7 @@ import org.apache.chemistry.opencmis.client.api.Session
 import org.springframework.web.multipart.MultipartFile
 
 class FicheroController {
-
+    def consultasService
     def alfrescoConnectService
     def alfrescoContentService
 
@@ -144,15 +144,26 @@ class FicheroController {
             Session session = alfrescoConnectService.conectar()
             result = alfrescoContentService.findByContent(params.contenido, session)
         }
-        render view:'list', model:['ficheros':result]
+        render template:'/fichero/layouts/tablaFicheros', model:['ficheros':result]
 
     }
 
     def busqueda(){
+        println params
+        def listaFicheros = []
+        Fichero fichero = null
 
-        //TO-DO usar la vista v_lista_ficheros y realizar las búsquedas
-        //Crear la vista al cargar la app
-        render view:'list', model:['ficheros':result]
+        def datos = consultasService.obtenerIdFicheros(params)
+        if(datos.size()>0){
+            datos.each{ idalfresco ->
+                fichero = Fichero.findByIdAlfresco(idalfresco.id_alfresco)
+                if(fichero){
+                    listaFicheros << fichero
+                }
+            }
+        }
+
+        render template:'/fichero/layouts/tablaFicheros', model:['ficheros':listaFicheros]
     }
 
 

@@ -67,7 +67,7 @@ class CasoController {
     }
 
     def edit(Caso caso) {
-        respond caso
+        ['caso':caso, 'gspSubtipos':caso.subtipoAsunto.tipoAsunto.subtipos]
     }
 
     @Transactional
