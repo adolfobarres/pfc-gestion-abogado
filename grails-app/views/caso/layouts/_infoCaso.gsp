@@ -42,8 +42,8 @@
     <div class="col-lg-12">
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-gavel" aria-hidden="true"></i> Actuaciones <span class="label label-info">${caso.actuaciones.size()}</span> </a></li>
-            <li><a data-toggle="pill" href="#menu1"><i class="fa fa-file-word-o" aria-hidden="true"></i> Ficheros <span class="label label-info">${caso.ficheros.size()}</span></a> </li>
-            <li><a data-toggle="pill" href="#menu2"><i class="fa fa-users" aria-hidden="true"></i> Clientes </a></li>
+            <li><a data-toggle="pill" href="#menu1"><i class="fa fa-file-word-o" aria-hidden="true"></i> Ficheros <span class="label label-info">${caso.ficheros.size() + caso.actuaciones.ficheros.flatten().size()}</span></a> </li>
+            <li><a data-toggle="pill" href="#menu2"><i class="fa fa-users" aria-hidden="true"></i> Clientes <span class="label label-info">${caso.otrosClientes.size()+1}</span></a></li>
             <li><a data-toggle="pill" href="#menu3"><i class="fa fa-calendar" aria-hidden="true"></i> Citas  <span class="label label-info">${caso.citas.findAll{it.realizada == false}.size()}</span></a> </li>
             <li><a data-toggle="pill" href="#menu4"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="facturacion.label"/> <span class="label label-info">${caso.facturas.size()}</span></a> </li>
         </ul>
@@ -79,8 +79,7 @@
                         </div></div>
             </div>
             <div id="menu2" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                <g:render template="layouts/listaClientes"/>
             </div>
             <div id="menu3" class="tab-pane fade">
                 <g:render template="layouts/listaCitasCaso"/>

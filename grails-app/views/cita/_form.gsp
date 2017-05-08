@@ -1,6 +1,8 @@
 <%@ page import="gestion.abogado.Caso" %>
+
+
 <div class="col-lg-12">
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <strong><i class="fa fa-calendar" aria-hidden="true"></i> <g:message
                     code="calendario.citas"></g:message></strong>

@@ -97,6 +97,28 @@ class CasoController {
     }
 
     @Transactional
+    def addOtroCliente(){
+        Caso caso = Caso.get(params.idCaso)
+        Cliente cliente = Cliente.get(params.idCliente)
+        if(caso && cliente){
+            OtrosClientesCaso otrosClientesCaso = new OtrosClientesCaso(caso:caso,cliente: cliente)
+            otrosClientesCaso.save(flush:true)
+        }
+        flash.message = message(code: 'cliente.add.al.caso')
+        redirect action: 'show', id:caso.id
+    }
+
+    def deleteOtroCliente(Long id){
+        OtrosClientesCaso otrosClientesCaso = OtrosClientesCaso.get(id)
+        def caso = otrosClientesCaso.caso
+        if(otrosClientesCaso){
+            otrosClientesCaso.delete(flush:true)
+            flash.message = message(code: 'cliente.remove.al.caso')
+            redirect action: 'show', id:caso.id
+        }
+    }
+
+    @Transactional
     def delete(Caso caso) {
 
         if (caso == null) {

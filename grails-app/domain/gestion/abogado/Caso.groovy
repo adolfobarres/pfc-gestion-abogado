@@ -25,8 +25,7 @@ class Caso {
         juzgado nullable:true
     }
 
-    static hasMany = [actuaciones: Actuacion, facturas: Factura, ficheros: Fichero, citas:Cita]
-
+    static hasMany = [actuaciones: Actuacion, facturas: Factura, ficheros: Fichero, citas:Cita,otrosClientes:OtrosClientesCaso]
     static transients = ['numActuacionesPendientes','estadoCaso']
 
     String toString(){"${numAsunto} - ${procedimiento}"}

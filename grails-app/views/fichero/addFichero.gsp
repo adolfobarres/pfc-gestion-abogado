@@ -21,7 +21,11 @@
         </g:hasErrors>
         <g:uploadForm name="myUpload" controller="fichero" action="upload">
             <g:render template="form"/>
-
+            <div class="row">
+                <div class="col-lg-12" style="text-align: right;">
+                    <input type="submit" value="${g.message(code:"fichero.subir")}" class="btn btn-primary">
+                </div>
+            </div>
         </g:uploadForm>
     </div>
     </div>

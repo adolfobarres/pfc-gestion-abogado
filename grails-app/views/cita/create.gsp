@@ -10,7 +10,7 @@
         <h4><i class="fa fa-plus" aria-hidden="true"></i> <g:message code="cita.nuevo.label"/></h4>
         <hr>
         <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+            <div class="alert alert-success" role="status">${flash.message}</div>
         </g:if>
         <g:hasErrors bean="${this.cita}">
             <ul class="alert alert-danger" role="alert">

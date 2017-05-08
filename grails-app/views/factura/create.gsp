@@ -26,8 +26,8 @@
                     <g:render template="form"/>
                 </fieldset>
                 <hr>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="btn" value="${message(code: 'default.button.addConceptos.label', default: 'Add Concept')}" />
+                <fieldset class="buttons" style="text-align: right;">
+                    <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.addConceptos.label', default: 'Add Concept')}" />
                 </fieldset>
             </g:form>
         </div>

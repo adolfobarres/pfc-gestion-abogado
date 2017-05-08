@@ -1,6 +1,6 @@
 <%@ page import="gestion.abogado.Actuacion; gestion.abogado.Caso" %>
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-file-o" aria-hidden="true"></i> <g:message code="fichero.datos"/></h3>
     </div>
@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="nombre"><g:message code="fichero.nombre"/> <span class="required-indicator">*</span></label>
+                    <label for="nombre"><g:message code="fichero.titulo"/> <span class="required-indicator">*</span></label>
                     <input type="text" class="form-control input-sm" id="nombre"  name="nombre" required="" value="${fichero?.nombre}"   >
                 </div>
             </div>
@@ -36,8 +36,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
-                    <label for="nombre"><g:message code="fichero.notas"/> <span class="required-indicator">*</span></label>
-                    <textarea class="form-control" rows="5" id="nota" name="notas" required="" value="${fichero?.notas}" ></textarea>
+                    <label for="nombre"><g:message code="fichero.notas"/> </label>
+                    <textarea class="form-control" rows="5" id="nota" name="notas" value="${fichero?.notas}" ></textarea>
                 </div>
             </div>
         </div>
@@ -49,8 +49,6 @@
                 </div>
             </div>
         </div>
-        <hr>
-        <input type="submit" value="${g.message(code:"fichero.subir")}" class="btn btn-success">
     </div>
 </div>
 

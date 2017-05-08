@@ -21,7 +21,10 @@
                 <td><g:formatDate date="${actuacion.fechaVencimiento}"/></td>
                 <td><g:formatDate date="${actuacion?.fechaFin}"/></td>
                 <td><g:link controller="actuacion" action="edit" id="${actuacion.id}" class="hollow button" style="padding: 2px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></g:link></td>
-                <td><g:link controller="actuacion" action="delete" id="${actuacion.id}" class="alert hollow button"  style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true"></i></g:link></td>
+                <td><g:link controller="actuacion" action="delete" id="${actuacion.id}" class="alert hollow button"
+                            onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"
+                            style="padding: 2px;"><i class="fa fa-trash" aria-hidden="true" style="color:red;"></i></g:link>
+                </td>
             </tr>
 
         </g:each>

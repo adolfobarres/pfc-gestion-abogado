@@ -6,7 +6,7 @@
 </head>
     <body>
     <div class="row-fluid">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-6 col-lg-offset-3">
             <h4><i class="fa fa-edit" aria-hidden="true"></i> <g:message code="cita.editar.label"/></h4>
             <hr>
             <g:if test="${flash.message}">
@@ -25,8 +25,8 @@
                     <g:render template="layouts/formCita"/>
                 </fieldset>
                 <hr>
-                <fieldset class="buttons">
-                    <input class="btn btn-success" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                <fieldset class="buttons" style="text-align: right;">
+                    <input class="btn btn-primary" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

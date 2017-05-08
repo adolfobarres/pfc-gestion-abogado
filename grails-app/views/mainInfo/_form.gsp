@@ -1,5 +1,5 @@
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-globe" aria-hidden="true"></i> <g:message code="mainInfo.datos.principales"/></h3>
     </div>
@@ -33,7 +33,7 @@
 
 
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-at" aria-hidden="true"></i> <g:message code="clientes.contacto"/></h3>
     </div>
@@ -77,7 +77,7 @@
     </div>
 </div>
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="informacion.fiscal"/></h3>
     </div>

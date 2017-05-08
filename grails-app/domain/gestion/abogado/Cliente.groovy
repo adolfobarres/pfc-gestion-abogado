@@ -27,6 +27,7 @@ class Cliente {
 
     static hasMany = [casos:Caso, ficheros:Fichero, citas:Cita]
 
+
     String toString(){"${nombre + " " + apellidos + " - " + nif}"}
 
     String getNifYNombre(){

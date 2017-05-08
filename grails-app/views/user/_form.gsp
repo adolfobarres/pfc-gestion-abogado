@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-6">
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-globe" aria-hidden="true"></i> <g:message code="user.datos.label"/></h3>
             </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="col-lg-6">
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title"><i class="fa fa-lock" aria-hidden="true"></i> <g:message code="usuario.contraseña.label"/></h3>
             </div>
@@ -50,7 +50,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="password"><i class="fa fa-lock"></i> <g:message code="user.password"/> <span class="required-indicator">*</span></label>
-                            <input  class="form-control input-sm" title="La contraseña debe contener al menos 6 carácteres(1 número y 1 letra minúscula y 1 mayúscula)" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password" onchange="
+                            <input  class="form-control input-sm" id="password" title="La contraseña debe contener al menos 6 carácteres(1 número y 1 letra minúscula y 1 mayúscula)" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" name="password" onchange="
                                 this.setCustomValidity(this.validity.patternMismatch ? this.title : '');
                                 if(this.checkValidity()) form.pwd2.pattern = this.value;
                             ">

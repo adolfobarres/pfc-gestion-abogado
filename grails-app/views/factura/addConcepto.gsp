@@ -11,7 +11,7 @@
         <h4><i class="fa fa-plus" aria-hidden="true"></i> <g:message code="default.create.label" args="[entityName]" /></h4>
         <hr>
         <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+            <div class="alert alert-success" role="status">${flash.message}</div>
         </g:if>
         <g:hasErrors bean="${this.conceptoFactura}">
             <ul class="alert alert-danger" role="alert">
@@ -31,8 +31,8 @@
             </fieldset>
             <fieldset>
                 <div class="row">
-                    <div class="col-lg-2">
-                        <button type="submit" class="btn btn-success"><g:message code="add.label"/></button>
+                    <div class="col-lg-12" style="text-align: right;">
+                        <button type="submit" class="btn btn-primary"><g:message code="add.label"/></button>
                     </div>
                 </div>
             </fieldset>

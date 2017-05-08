@@ -1,5 +1,5 @@
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-globe" aria-hidden="true"></i> <g:message code="tipoProcedimiento.datos.label"/></h3>
     </div>

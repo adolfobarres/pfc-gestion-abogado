@@ -1,5 +1,6 @@
 package gestion.abogado
 
+import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -97,6 +98,34 @@ class ClienteController {
 
         render template:"/cita/layouts/cmbCasos", model:['gspCasos':vCasos]
     }
+
+    def listJSON(){
+
+        Caso caso = Caso.get(params.caso)
+
+        def listaClientesAsignados = []
+        listaClientesAsignados << caso.cliente
+        listaClientesAsignados << caso.otrosClientes.cliente
+        listaClientesAsignados = listaClientesAsignados.flatten()
+
+        def vListaClientes = Cliente.list().findAll{it.nifYNombre.toLowerCase().contains(params.term.toLowerCase())}
+        def vListaResultado = []
+
+        listaClientesAsignados.each { clienteAsignado ->
+            def clienteEncontrado =  vListaClientes.find{it.id == clienteAsignado.id}
+            if(clienteEncontrado){
+                vListaClientes.remove(clienteEncontrado)
+            }
+        }
+
+        def resultado = []
+        vListaClientes.each{ cliente ->
+            resultado << ["label":cliente.nifYNombre,"value":cliente.id]
+        }
+
+        render resultado as JSON
+    }
+
 
 
     protected void notFound() {

@@ -18,7 +18,7 @@
     <g:set var="numero" value="${numFactura}"/>
 </g:else>
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="factura.datos.principales"/></h3>
     </div>

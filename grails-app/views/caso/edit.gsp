@@ -26,8 +26,8 @@
                     <g:render template="form" model="[caso:caso]"/>
                 </fieldset>
                 <hr>
-                <fieldset class="buttons">
-                    <input class="btn btn-success" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                <fieldset class="buttons" style="text-align: right;">
+                    <input class="btn btn-primary" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
                 </fieldset>
             </g:form>
         </div>

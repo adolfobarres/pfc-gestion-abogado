@@ -10,6 +10,7 @@
 //= require moment.min
 //= require datatables.min
 //= require datetime-moment
+//= require jquery-ui/jquery-ui
 //= require_self
 
 if (typeof jQuery !== 'undefined') {

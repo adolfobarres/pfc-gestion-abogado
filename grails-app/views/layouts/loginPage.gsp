@@ -15,6 +15,8 @@
     <asset:stylesheet src="DataTables/media/css/dataTables.bootstrap.min.css"/>
     <asset:stylesheet src="font-awesome/css/font-awesome.min.css"/>
     <asset:stylesheet src="fullcalendar/fullcalendar.min.css"/>
+    <asset:stylesheet src="jquery-ui/jquery-ui.min.css"/>
+
 
 
     <asset:javascript src="application.js"/>
