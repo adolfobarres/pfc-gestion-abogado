@@ -1,5 +1,6 @@
 package com.spring.security
 
+import gestion.abogado.EnvioEmail
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -9,6 +10,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 
 class UserController {
+
+    def mailService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
 
@@ -80,6 +83,71 @@ class UserController {
 
         }
 
+    @Secured("permitAll")
+    def rememberPassword(){
+
+    }
+
+    @Secured("permitAll")
+    def renewPassword(){
+
+            if(User.findByEmail(params.email)){
+                String id = UUID.randomUUID().toString()
+                String url = g.createLink(action:"newPassword",controller: "user",absolute: true,params: ['uid':id])
+
+
+                mailService.sendMail {
+                    to params.email
+                    subject "SIGAB - Renovación de contraseña"
+                    html "<b>Renovación de contraseña solicitada</b><br> Por favor haga clic en el siguiente link para cambiar su contraseña" +
+                            "<br> <a href='"+url+"'>"+url+"</a>"
+
+                }
+
+                def enviosAnteriores = EnvioEmail.findAllByEmail(params.email)*.delete(flush:true)
+
+                EnvioEmail envioEmail = new EnvioEmail(idGenerado: id, email: params.email).save(flush: true)
+
+                flash.message = "Revise su bandeja de entrada, se ha enviado un email"
+
+            }
+        else{
+                flash.messageerror = "No existe un usuario con dicho email"
+            }
+
+        redirect action:"rememberPassword"
+        }
+
+    @Secured("permitAll")
+    def changePassword(){
+        if(params.uid){
+            EnvioEmail envioEmail = EnvioEmail.findByIdGenerado(params.uid)
+            User user = User.findByEmail(envioEmail.email)
+            if(user){
+                user.password = params.password
+                user.validate()
+                user.save(flush:true)
+                envioEmail.delete()
+                redirect url:"/"
+            }
+        }
+
+    }
+
+    @Secured("permitAll")
+    def newPassword(){
+
+        if(params.uid){
+            EnvioEmail envioEmail = EnvioEmail.findByIdGenerado(params.uid)
+            if(envioEmail){
+                [gspEmail:envioEmail.email]
+            }
+            else{
+                flash.messageerror = "No puede renovarse la contraseña, uid no encontrado"
+            }
+        }
+
+    }
 
     @Transactional
     def delete(User user) {

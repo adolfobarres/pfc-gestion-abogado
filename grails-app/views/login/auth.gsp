@@ -21,7 +21,9 @@
 <hr>
 			<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><g:message code="user.entrar"/></button>
 		</form><!-- /form -->
-
+		<div style="margin-top:10px;text-align:right;">
+		<g:link controller="user" action="rememberPassword"><g:message code="olvide.password"/></g:link>
+		</div>
 	</div><!-- /card-container -->
 </div><!-- /container -
 

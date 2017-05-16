@@ -59,6 +59,9 @@ grails:
     spring:
         transactionManagement:
             proxies: false
+
+
+
 info:
     app:
         name: '@info.app.name@'
@@ -133,4 +136,20 @@ grails:
 endpoints:
     jmx:
         unique-names: true
+
+---
+grails:
+    mail:
+        host: "smtp.gmail.com"
+        port: 465
+        username: "sigabmail@gmail.com"
+        password: "mpchsup206"
+        props:
+            mail.smtp.auth: "true"
+            mail.smtp.socketFactory.port: "465"
+            mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
+            mail.smtp.socketFactory.fallback: "false"
+
+
+
 
