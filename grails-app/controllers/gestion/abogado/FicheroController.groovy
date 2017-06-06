@@ -139,7 +139,7 @@ class FicheroController {
     }
 
     def busquedaContenido(){
-        def result
+        def result = null
         if(params.contenido) {
             Session session = alfrescoConnectService.conectar()
             result = alfrescoContentService.findByContent(params.contenido, session)

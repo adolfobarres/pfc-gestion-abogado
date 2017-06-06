@@ -32,6 +32,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-calendar" aria-hidden="true"></i> <g:message code="agenda.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><g:link controller="cita" action="create"><g:message code="citas.lista"/></g:link></li>
+                        <li><g:link controller="cita" action="vencimientoActuaciones"><g:message code="citas.vencimientos"/></g:link></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -50,7 +51,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bar-chart" aria-hidden="true"></i> <g:message code="informes.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><g:link controller="fichero" action="list"><g:message code="informes"/></g:link></li>
+                        <li><g:link controller="report" action="listaFacturas"><g:message code="informes.label"/></g:link></li>
                         <li><a href="#">Another action</a></li>
                     </ul>
                 </li>

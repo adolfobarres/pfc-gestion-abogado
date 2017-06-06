@@ -48,7 +48,7 @@ class CitaController {
 
     @Transactional
     def save(Cita cita) {
-        println params
+
         cita.minutosComienzo = CitaService.getMinutos(params.horaSeleccionada)
         cita.horaComienzo = CitaService.getHoras(params.horaSeleccionada)
         cita.minutosFin = CitaService.getMinutos(params.horaFin)
@@ -97,6 +97,12 @@ class CitaController {
 
     @Transactional
     def update(Cita cita) {
+        cita.minutosComienzo = CitaService.getMinutos(params.horaSeleccionada)
+        cita.horaComienzo = CitaService.getHoras(params.horaSeleccionada)
+        cita.minutosFin = CitaService.getMinutos(params.horaFin)
+        cita.horaFin = CitaService.getHoras(params.horaFin)
+        cita.validate()
+
         if (cita == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -207,7 +213,22 @@ class CitaController {
                                 'cliente': cita.cliente.id, 'realizada':cita.realizada?'Y':'N', 'color':cita.realizada?'green':'red']
         }
 
-        def json = ['events': listaEventos]
+        render listaEventos as JSON
+    }
+
+    def vencimientoActuaciones(){}
+
+    def listaVencimientoActuacionesJSON(){
+        def vListaActuaciones = Actuacion.list().findAll{it.fechaVencimiento != null}
+        def listaEventos = []
+
+        vListaActuaciones.each{ actuacion ->
+            listaEventos << ['id':actuacion.id,'title': actuacion.caso.numAsunto + ' ' + '['+actuacion.descripcion+']',
+                             'start': actuacion.fechaVencimiento.format("YYYY-MM-dd"),'allDay':true,
+                              'color':actuacion.fechaFin?'green':'red','caso':actuacion.caso.id]
+
+        }
+
         render listaEventos as JSON
     }
 }
