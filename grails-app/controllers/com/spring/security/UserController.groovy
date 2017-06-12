@@ -90,8 +90,8 @@ class UserController {
 
     @Secured("permitAll")
     def renewPassword(){
-
-            if(User.findByEmail(params.email)){
+            def user = User.findByEmail(params.email)
+            if(user){
                 String id = UUID.randomUUID().toString()
                 String url = g.createLink(action:"newPassword",controller: "user",absolute: true,params: ['uid':id])
 
@@ -99,8 +99,11 @@ class UserController {
                 mailService.sendMail {
                     to params.email
                     subject "SIGAB - Renovación de contraseña"
-                    html "<b>Renovación de contraseña solicitada</b><br> Por favor haga clic en el siguiente link para cambiar su contraseña" +
-                            "<br> <a href='"+url+"'>"+url+"</a>"
+                    html "<b>Renovación de contraseña solicitada</b><br>" +
+                            " Por favor haga clic en el siguiente link para cambiar su contraseña<br>" +
+                            "Usuario: " + user.username +
+                            "<br>" +
+                            " <a href='"+url+"'>"+url+"</a>"
 
                 }
 
@@ -128,7 +131,8 @@ class UserController {
                 user.validate()
                 user.save(flush:true)
                 envioEmail.delete()
-                redirect url:"/"
+                flash.message = "Contraseña cambiada con éxito, haga login con la nueva contraseña"
+                redirect action:"auth",controller: "login"
             }
         }
 

@@ -62,7 +62,7 @@
             <div class="col-lg-4">
                 <label for="iva"><g:message code="factura.iva.label"/> <span class="required-indicator">*</span></label>
                 <div class="input-group">
-                    <input type="number" step="1" min="0" max="100" class="form-control input-s m" id="iva" name="factura.iva" required="" value="${iva}" >
+                    <input type="number" step="1" min="0" max="100" class="form-control input-sm" id="iva" name="factura.iva" required="" value="${iva}" >
                     <span class="input-group-addon" id="basic-addon1">%</span>
                 </div>
             </div>
@@ -71,6 +71,13 @@
                 <div class="input-group">
                     <input type="number" step="1" min="0" max="100"  class="form-control input-sm" id="irpf" name="factura.irpf"  value="${factura?.irpf}" >
                     <span class="input-group-addon" id="basic-addon2">%</span>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="formaPago"><g:message code="factura.formadePago.label"/> <span class="required-indicator">*</span></label>
+                    <g:select id="formaPago" name='factura.formaDePago' value="${factura?.formaDePago}" class="form-control input-sm"
+                              from='${['EFECTIVO','TRANSFERENCIA','TARJETA']}'></g:select>
                 </div>
             </div>
         </div>

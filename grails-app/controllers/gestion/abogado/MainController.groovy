@@ -7,13 +7,26 @@ import groovy.sql.Sql
 @Secured(["ROLE_ADMIN","ROLE_ABOGADO","ROLE_ADMINISTRATIVO"])
 class MainController {
     def dataSource
+    def springSecurityService
 
     def dashboard() { }
 
     def ultimosCasos(){
-
-        def ultimosCasos = Caso.list().sort{it.fechaAlta}
-        def ultimosCasosOrdenados = ultimosCasos.reverse()[0..4]
+        def user = springSecurityService.currentUser
+        def ultimosCasos = null
+        if(user.authorities.any{ it.authority == "ROLE_ADMIN" }){
+            ultimosCasos = Caso.list().sort{it.fechaAlta}
+        }
+        else if(user.authorities.any{it.authority == "ROLE_ABOGADO"}){
+            ultimosCasos = Caso.findAllByAddedBy(user).sort{it.fechaAlta}
+        }
+        def ultimosCasosOrdenados = null
+        if(ultimosCasos.size()>5){
+            ultimosCasosOrdenados = ultimosCasos.reverse()[0..4]
+        }
+        else{
+            ultimosCasosOrdenados = ultimosCasos.reverse()
+        }
         render template:'layouts/ultimosCasos', model: ['listCasos':ultimosCasosOrdenados]
     }
 

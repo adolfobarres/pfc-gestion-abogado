@@ -5,7 +5,9 @@
 	<style type="text/css" media="screen">
 </head>
 <body>
-
+<g:if test="${flash.message}">
+<div class="alert alert-info" role="status">${flash.message}</div>
+															  </g:if>
 
 <div class="container">
 	<div class="card card-container">
@@ -19,6 +21,11 @@
 </div>
 			<input type="password"  name="${passwordParameter ?: 'password'}" id="password" class="form-control" placeholder="contraseña"/>
 <hr>
+ <g:if test="${params.login_error}">
+	<div class="alert alert-danger">
+<i class="fa fa-frown-o" aria-hidden="true"></i> Error de autenticacion, introduzca un usuario y contraseña válidos.
+    </div>
+</g:if>
 			<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><g:message code="user.entrar"/></button>
 		</form><!-- /form -->
 		<div style="margin-top:10px;text-align:right;">

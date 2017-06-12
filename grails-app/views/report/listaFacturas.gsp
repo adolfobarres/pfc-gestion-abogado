@@ -21,7 +21,7 @@
             <div class="from-group">
                 <label for="mes"><g:message code="mes.label"/> </label>
                 <g:select from="${[["num":1,"nombre":"Enero"],["num":2,"nombre":"Febrero"],["num":3,"nombre":"Marzo"],["num":4,"nombre":"Abril"],
-                                   ["num":5,"nombre":"Mayo"],["num":5,"nombre":"Junio"],["num":7,"nombre":"Julio"],["num":8,"nombre":"Agosto"],
+                                   ["num":5,"nombre":"Mayo"],["num":6,"nombre":"Junio"],["num":7,"nombre":"Julio"],["num":8,"nombre":"Agosto"],
                                    ["num":9,"nombre":"Septiembre"],["num":10,"nombre":"Octubre"],["num":11,"nombre":"Noviembre"],["num":12,"nombre":"Diciembre"]]}"
                         id="mes"  optionKey="num" optionValue="nombre" name="mes" class="form-control input-sm"noSelection="['':'--Todos--']"></g:select>
             </div>

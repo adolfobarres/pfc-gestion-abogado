@@ -9,6 +9,8 @@
         <th><g:message code="factura.irpf.label"/></th>
         <th><g:message code="conceptoFactura.importe.label"/></th>
         <th><g:message code="conceptoFactura.importeconIva.label"/></th>
+        <th>Total <g:message code="factura.irpf.label"/></th>
+        <th><g:message code="factura.aabonar"/> </th>
         <th><g:message code="factura.abonada.label"/></th>
         <th></th>
         <th></th>
@@ -21,18 +23,38 @@
             <td><g:link controller="caso" action="show" id="${factura.caso.id}">${factura.caso.numAsunto}</g:link></td>
             <td><g:link controller="cliente" action="show" id="${factura.caso.cliente.id}" title="${factura.caso.cliente}">${factura.caso.cliente.nif}</g:link></td>
             <td><g:formatDate date="${factura.fecha}"/></td>
-            <td>${factura.iva}</td>
-            <td>${factura.irpf}</td>
+            <td style="border-left:1px solid grey;">${factura.iva}%</td>
+            <td>
+                <g:if test="${factura.irpf}">
+                    ${factura.irpf}%
+                </g:if>
+            </td>
             <g:if test="${factura.conceptos}">
+                <td style="border-left:1px solid grey;">
+                    <g:formatNumber number="${factura?.totalBase}" type="currency" currencyCode="EUR" /></td>
                 <td>
-                    <g:formatNumber number="${factura?.conceptos?.importe?.sum()}" type="currency" currencyCode="EUR" /></td>
+                    <g:formatNumber number="${factura?.totalIva}" type="currency" currencyCode="EUR" />
+                </td>
                 <td>
-                    <g:formatNumber number="${factura?.conceptos?.importe?.sum()*(1+(gestion.abogado.MainInfo.list().first().iva/100))}" type="currency" currencyCode="EUR" />
+                    <g:if test="${factura.irpf}">
+                    <g:formatNumber number="${factura?.totalIrpf}" type="currency" currencyCode="EUR" />
+                    </g:if>
+
+                </td>
+                <td>
+                    <g:if test="${factura?.totalIrpf != 0}">
+                        <strong><g:formatNumber number="${factura?.totalIva - factura?.totalIrpf}" type="currency" currencyCode="EUR" /></strong>
+                    </g:if>
+                    <g:else>
+                        <strong><g:formatNumber number="${factura?.totalIva}" type="currency" currencyCode="EUR" /></strong>
+                    </g:else>
                 </td>
             </g:if>
             <g:else>
-                <td><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></td>
-                <td><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></td>
+                <td style="border-left:1px solid grey;" ><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></td>
+                <td ><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></td>
+                <td></td>
+                <td><strong><g:formatNumber number="${0}" type="currency" currencyCode="EUR" /></strong></td>
             </g:else>
             <td>
                 <g:if test="${factura?.abonada}">
