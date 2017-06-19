@@ -14,7 +14,7 @@ class MainController {
     def ultimosCasos(){
         def user = springSecurityService.currentUser
         def ultimosCasos = null
-        if(user.authorities.any{ it.authority == "ROLE_ADMIN" }){
+        if(user.authorities.any{ it.authority == "ROLE_ADMIN" } || user.authorities.any{ it.authority == "ROLE_ADMINISTRATIVO" } ){
             ultimosCasos = Caso.list().sort{it.fechaAlta}
         }
         else if(user.authorities.any{it.authority == "ROLE_ABOGADO"}){
@@ -98,5 +98,10 @@ class MainController {
         db.close()
 
         render resultadoFinal as JSON
+    }
+
+    def pestanaCaso(){
+        session["pestanaCaso"] = params.pestana
+        return true
     }
 }

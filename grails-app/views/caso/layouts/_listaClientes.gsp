@@ -4,11 +4,11 @@
 <script>
     $( function() {
 
-        $( "#clientes" ).keypress(function() {
+        $( "#otrosclientes" ).keypress(function() {
             $( "#buton-add-cliente" ).prop( "disabled", true );
         });
 
-        $( "#clientes" ).autocomplete({
+        $( "#otrosclientes" ).autocomplete({
             source: "<g:createLink controller="cliente" action="listJSON" params="['caso':caso.id]"/>",
             minLength: 2,
             select: function( event, ui ) {
@@ -29,7 +29,7 @@
         <div class="ui-widget">
             <div class="form-group">
                 <label for="clientes"><g:message code="cliente.otros.label"/>: </label>
-                <input id="clientes" class="form-control input-sm" placeholder="dni o nombre">
+                <input id="otrosclientes" class="form-control input-sm" placeholder="dni o nombre">
                 <input type="hidden" id="idCliente" name="idCliente"/>
                 <input type="hidden" name="idCaso" value="${caso.id}"/>
             </div>

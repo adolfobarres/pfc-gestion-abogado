@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
-@Secured("ROLE_ADMIN")
+@Secured(["ROLE_ADMIN","ROLE_ABOGADO","ROLE_ADMINISTRATIVO"])
 @Transactional(readOnly = true)
 class CitaController {
 

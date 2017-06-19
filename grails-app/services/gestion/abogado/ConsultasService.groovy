@@ -10,7 +10,13 @@ class ConsultasService {
     def obtenerDatosFactura(Long id) {
 
         String query = "select cliente.nombre, cliente.apellidos, factura.numero, " +
-                "       factura.fecha, concepto_factura.descripcion, concepto_factura.importe" +
+                "       factura.fecha, concepto_factura.descripcion, concepto_factura.importe," +
+                "      if( " +
+                "        concepto_factura.es_suplido, " +
+                "        concepto_factura.importe, " +
+                "        concepto_factura.importe " +
+                "                + (concepto_factura.importe * factura.iva / 100)) " +
+                "        AS importe_con_iva " +
                 "  from factura" +
                 "    left join concepto_factura on factura.id = concepto_factura.factura_id" +
                 "    inner join caso on factura.caso_id = caso.id" +
@@ -25,23 +31,32 @@ class ConsultasService {
     }
 
     def listaFacturas(def params){
-        String query="SELECT factura.numero,\n" +
-                "       caso.num_asunto,\n" +
-                "       cliente.nif,\n" +
-                "       cliente.nombre,\n" +
-                "       cliente.apellidos,\n" +
-                "       factura.fecha,\n" +
-                "       factura.iva,\n" +
-                "       factura.irpf,\n" +
-                "       round(sum(concepto_factura.importe),2) importe_sin_iva,\n" +
-                "       round(sum(concepto_factura.importe)*(1+factura.iva/100),2) importe_con_iva,\n" +
-                "       if(factura.abonada,'SI','NO') abonada\n" +
-                "FROM factura\n" +
-                "     INNER JOIN concepto_factura\n" +
-                "        ON concepto_factura.factura_id = factura.id\n" +
-                "     INNER JOIN caso ON caso.id = factura.caso_id\n" +
-                "     INNER JOIN cliente ON cliente.id = caso.cliente_id\n" +
-                "     WHERE 1 = 1"
+        String query="SELECT factura.numero, \
+                            caso.num_asunto, \
+                            cliente.nif, \
+                            cliente.nombre, \
+                            cliente.apellidos, \
+                            factura.fecha, \
+                            factura.iva, \
+                            factura.irpf, \
+                            round(sum(concepto_factura.importe), 2) importe_sin_iva, \
+                            round( \
+                                    sum( \
+                                            if(concepto_factura.es_suplido, \
+                                            concepto_factura.importe, \
+                                            concepto_factura.importe * (1 + factura.iva / 100))) \
+                                    - if(factura.irpf, \
+                            sum(concepto_factura.importe * factura.irpf / 100), \
+                            0), \
+                            2) \
+                            importe_con_iva, \
+                            if(factura.abonada, 'SI', 'NO')         abonada \
+                            FROM factura \
+                            INNER JOIN concepto_factura \
+                            ON concepto_factura.factura_id = factura.id \
+                            INNER JOIN caso ON caso.id = factura.caso_id \
+                            INNER JOIN cliente ON cliente.id = caso.cliente_id \
+                            WHERE 1 = 1 "
 
 
         if(params.anno){

@@ -22,6 +22,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="panel-footer" style="text-align: right;"><g:link action="create" controller="caso" params="['idCliente':cliente.id]" class="btn btn-default btn-sm" ><i class="fa fa-plus"></i> <g:message code="caso.nuevo.label"/></g:link></div>
+
+            <div class="panel-footer" style="text-align: right;min-height: 51px;">
+                <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_ABOGADO">
+                    <g:link action="create" controller="caso" params="['idCliente':cliente.id]" class="btn btn-default btn-sm" ><i class="fa fa-plus"></i> <g:message code="caso.nuevo.label"/></g:link>
+                </sec:ifAnyGranted>
+            </div>
+
 
         </div>

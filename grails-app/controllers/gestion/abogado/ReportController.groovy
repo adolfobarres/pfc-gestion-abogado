@@ -10,7 +10,7 @@ import gestion.abogado.Factura;
 
 import gestion.abogado.MainInfo
 
-@Secured("ROLE_ADMIN")
+@Secured(["ROLE_ADMIN","ROLE_ABOGADO","ROLE_ADMINISTRATIVO"])
 class ReportController {
 
     def consultasService

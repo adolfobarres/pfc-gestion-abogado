@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-@Secured('ROLE_ADMIN')
+@Secured(["ROLE_ADMIN","ROLE_ABOGADO","ROLE_ADMINISTRATIVO"])
 class ClienteController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "GET"]
@@ -100,7 +100,7 @@ class ClienteController {
     }
 
     def listJSON(){
-
+        println params
         Caso caso = Caso.get(params.caso)
 
         def listaClientesAsignados = []
@@ -111,12 +111,15 @@ class ClienteController {
         def vListaClientes = Cliente.list().findAll{it.nifYNombre.toLowerCase().contains(params.term.toLowerCase())}
         def vListaResultado = []
 
+        println vListaClientes
+
         listaClientesAsignados.each { clienteAsignado ->
             def clienteEncontrado =  vListaClientes.find{it.id == clienteAsignado.id}
             if(clienteEncontrado){
                 vListaClientes.remove(clienteEncontrado)
             }
         }
+
 
         def resultado = []
         vListaClientes.each{ cliente ->

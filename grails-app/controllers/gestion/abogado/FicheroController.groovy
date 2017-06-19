@@ -1,11 +1,13 @@
 package gestion.abogado
 
+import grails.plugin.springsecurity.annotation.Secured
 import org.apache.chemistry.opencmis.client.api.CmisObject
 import org.apache.chemistry.opencmis.client.api.Document
 import org.apache.chemistry.opencmis.client.api.Folder
 import org.apache.chemistry.opencmis.client.api.Session
 import org.springframework.web.multipart.MultipartFile
 
+@Secured(["ROLE_ADMIN","ROLE_ABOGADO"])
 class FicheroController {
     def consultasService
     def alfrescoConnectService

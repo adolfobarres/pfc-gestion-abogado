@@ -41,15 +41,15 @@
 <div class="row">
     <div class="col-lg-12">
         <ul class="nav nav-tabs" id="myTab">
-            <li class="active"><a data-toggle="pill" href="#home"><i class="fa fa-gavel" aria-hidden="true"></i> Actuaciones <span class="label label-info">${caso.actuaciones.size()}</span> </a></li>
-            <li><a data-toggle="pill" href="#menu1"><i class="fa fa-file-word-o" aria-hidden="true"></i> Ficheros <span class="label label-info">${caso.ficheros.size() + caso.actuaciones.ficheros.flatten().size()}</span></a> </li>
-            <li><a data-toggle="pill" href="#menu2"><i class="fa fa-users" aria-hidden="true"></i> Clientes <span class="label label-info">${caso.otrosClientes.size()+1}</span></a></li>
-            <li><a data-toggle="pill" href="#menu3"><i class="fa fa-calendar" aria-hidden="true"></i> Citas  <span class="label label-info">${caso.citas.findAll{it.realizada == false}.size()}</span></a> </li>
-            <li><a data-toggle="pill" href="#menu4"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="facturacion.label"/> <span class="label label-info">${caso.facturas.size()}</span></a> </li>
+            <li <g:if test="${session.pestanaCaso == 'casos' || !session.pestanaCaso}">class="active"</g:if>><a data-toggle="pill" href="#casos" onclick="activaPestana('casos')"><i class="fa fa-gavel" aria-hidden="true"></i> Actuaciones <span class="label label-info">${caso.actuaciones.size()}</span> </a></li>
+            <li <g:if test="${session.pestanaCaso == 'ficheros'}">class="active"</g:if>> <a data-toggle="pill" href="#ficheros" onclick="activaPestana('ficheros')"><i class="fa fa-file-word-o" aria-hidden="true"></i> Ficheros <span class="label label-info">${caso.ficheros.size() + caso.actuaciones.ficheros.flatten().size()}</span></a> </li>
+            <li <g:if test="${session.pestanaCaso == 'clientes'}">class="active"</g:if>><a data-toggle="pill" href="#clientes" onclick="activaPestana('clientes')"><i class="fa fa-users" aria-hidden="true"></i> Clientes <span class="label label-info">${caso.otrosClientes.size()+1}</span></a></li>
+            <li <g:if test="${session.pestanaCaso == 'citas'}">class="active"</g:if>><a data-toggle="pill" href="#citas" onclick="activaPestana('citas')"><i class="fa fa-calendar" aria-hidden="true"></i> Citas  <span class="label label-info">${caso.citas.findAll{it.realizada == false}.size()}</span></a> </li>
+            <li <g:if test="${session.pestanaCaso == 'facturas'}">class="active"</g:if>><a data-toggle="pill" href="#facturas" onclick="activaPestana('facturas')"><i class="fa fa-money" aria-hidden="true"></i> <g:message code="facturacion.label"/> <span class="label label-info">${caso.facturas.size()}</span></a> </li>
         </ul>
 
         <div class="tab-content">
-            <div id="home" class="tab-pane fade in active">
+            <div id="casos" class="tab-pane fade in <g:if test="${session.pestanaCaso == 'casos' || !session.pestanaCaso}">active</g:if>">
                 <div class="row">
                     <div class="col-lg-12" style="margin-top: 20px;">
                         <div class="btn-group" role="group">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div id="menu1" class="tab-pane fade">
+            <div id="ficheros" class="tab-pane fade <g:if test="${session.pestanaCaso == 'ficheros'}">in active</g:if>">
                 <div class="row">
                 <div class="col-lg-12" style="margin-top: 20px;">
                     <div class="btn-group" role="group">
@@ -78,13 +78,13 @@
                 <g:render template="layouts/listaFicheros"/>
                         </div></div>
             </div>
-            <div id="menu2" class="tab-pane fade">
+            <div id="clientes" class="tab-pane fade <g:if test="${session.pestanaCaso == 'clientes'}">in active</g:if>">
                 <g:render template="layouts/listaClientes"/>
             </div>
-            <div id="menu3" class="tab-pane fade">
+            <div id="citas" class="tab-pane fade <g:if test="${session.pestanaCaso == 'citas'}">in active</g:if>">
                 <g:render template="layouts/listaCitasCaso"/>
             </div>
-            <div id="menu4" class="tab-pane fade">
+            <div id="facturas" class="tab-pane fade <g:if test="${session.pestanaCaso == 'facturas'}">in active</g:if>">
                 <div class="row">
                     <div class="col-lg-12" style="margin-top: 20px;">
                         <div class="btn-group" role="group">
@@ -103,3 +103,14 @@
 
     </div>
 </div>
+
+
+    <script>
+        function activaPestana(pestana) {
+            jQuery.ajax({
+                type: 'POST',
+                data: 'pestana=' + pestana,
+                url: '${createLink(action: 'pestanaCaso',controller:'main')}'
+            });
+        }
+    </script>

@@ -38,4 +38,8 @@
                 </tbody>
                 </table>
 </div>
-<div class="panel-footer" style="text-align: right;"><g:link action="addFichero" controller="fichero" params="['idCliente':cliente.id]" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> <g:message code="fichero.nuevo"/></g:link></div>
+<div class="panel-footer" style="text-align: right;;min-height: 51px;">
+    <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_ABOGADO">
+        <g:link action="addFichero" controller="fichero" params="['idCliente':cliente.id]" class="btn btn-default btn-sm"><i class="fa fa-plus"></i> <g:message code="fichero.nuevo"/></g:link>
+    </sec:ifAnyGranted>
+    </div>
