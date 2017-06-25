@@ -28,7 +28,7 @@ class Caso {
     static hasMany = [actuaciones: Actuacion, facturas: Factura, ficheros: Fichero, citas:Cita,otrosClientes:OtrosClientesCaso]
     static transients = ['numActuacionesPendientes','estadoCaso']
 
-    String toString(){"${numAsunto} - ${procedimiento}"}
+    String toString(){"${numAsunto} - ${subtipoAsunto.tipoAsunto}    - ${procedimiento}"}
 
     def beforeValidate(){
         addedBy =  springSecurityService.currentUser

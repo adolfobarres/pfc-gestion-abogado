@@ -140,6 +140,7 @@ class TipoAsuntoController {
         redirect action:"index", method:"GET"
     }
 
+    @Secured('ROLE_ABOGADO')
     def getSubtipos(Long tipoId){
         TipoAsunto tipoAsunto = TipoAsunto.get(tipoId)
         def subTipos = []

@@ -6,6 +6,7 @@
             <div class="form-group">
                 <input type="text" pattern=".{3,}"  title="mínimo 3 caracteres" class="form-control" placeholder="<g:message code="fichero.caso"/>" name="caso" value="${params?.caso}">
                 <input type="text" pattern=".{3,}"  title="mínimo 3 caracteres" class="form-control" placeholder="<g:message code="fichero.dni.cliente"/>" name="dni" value="${params?.dni}">
+                <input type="text" pattern=".{3,}"  title="mínimo 3 caracteres" class="form-control" placeholder="<g:message code="fichero.descripcion.cliente"/>" name="descripcion" value="${params?.descripcion}">
             </div>
             <button type="submit" class="btn btn-default"><g:message code="fichero.buscar"/></button>
         </form>

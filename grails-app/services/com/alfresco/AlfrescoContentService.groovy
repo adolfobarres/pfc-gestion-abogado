@@ -19,7 +19,8 @@ import javax.swing.text.Document
 @Transactional
 class AlfrescoContentService {
 
-    def rootPath = "/Sitios/abogado-y-tributos/documentlibrary"
+    //def rootPath = "/Sitios/abogado-y-tributos/documentlibrary"
+    def rootPath = "/Sitios/sigab/documentlibrary"
 
     String getRootPath(){
         return rootPath

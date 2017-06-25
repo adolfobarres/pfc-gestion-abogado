@@ -104,8 +104,45 @@ class ConsultasService {
         if(params.caso){
             query += " and caso like \"%"+params.caso+"%\""
         }
+        if(params.descripcion){
+            query += " and (nombre like \"%"+params.descripcion+"%\" or descripcion like \"%"+params.descripcion+"%\")"
+        }
 
 
+        def sql = new Sql(dataSource)
+        def rows = sql.rows(query)
+        return rows
+    }
+
+    def listaCitas(def params){
+
+        String query = "SELECT date_format(cita.fecha,'%d/%m/%Y') as fecha,\n" +
+                "       concat(lpad(cita.hora_comienzo, 2, '0'),\":\",lpad(cita.minutos_comienzo, 2, '0')) AS inicio,\n" +
+                "       concat(lpad(cita.hora_fin, 2, '0'),\":\",lpad(cita.minutos_fin, 2, '0')) AS fin,\n" +
+                "       cliente.nif,\n" +
+                "       cliente.apellidos,\n" +
+                "       cliente.nombre,\n" +
+                "       caso.num_asunto,\n" +
+                "       tipo_asunto.descripcion as tipo_asunto,\n" +
+                "       subtipo_asunto.descripcion as subtipo_asunto\n" +
+                "FROM cita\n" +
+                "     INNER JOIN cliente ON cliente.id = cita.cliente_id\n" +
+                "     LEFT OUTER JOIN caso ON caso.id = cita.caso_id\n" +
+                "     INNER JOIN subtipo_asunto\n" +
+                "        ON subtipo_asunto.id = caso.subtipo_asunto_id\n" +
+                "     INNER JOIN tipo_asunto\n" +
+                "        ON tipo_asunto.id = subtipo_asunto.tipo_asunto_id where 1 = 1"
+
+        if(params.from){
+            query += " and fecha >= STR_TO_DATE('"+params.from+"', '%Y-%m-%d')"
+        }
+        if(params.to){
+            query += " and fecha <= STR_TO_DATE('"+params.to+"', '%Y-%m-%d')"
+        }
+
+        String orderBY =  " ORDER BY cita.fecha, cita.hora_comienzo, cita.minutos_comienzo"
+
+        query += orderBy
         def sql = new Sql(dataSource)
         def rows = sql.rows(query)
         return rows

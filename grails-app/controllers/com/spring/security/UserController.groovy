@@ -76,6 +76,14 @@ class UserController {
             return
         }
 
+        UserRole.removeAll(user)
+        def vUser = User.get(user.id)
+        def vRoles = [params.roles].flatten()
+        vRoles.each{ rol ->
+            def vRol = Role.findByAuthority(rol)
+            UserRole userRole = new UserRole(user: vUser, role: vRol).save(flush:true)
+        }
+
         user.save flush:true
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])

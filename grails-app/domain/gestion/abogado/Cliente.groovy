@@ -19,7 +19,8 @@ class Cliente {
         nombre()
         apellidos()
         nif unique:true
-        email email:true
+        email email:true, nullable:true
+        movil nullable:true
 
     }
 

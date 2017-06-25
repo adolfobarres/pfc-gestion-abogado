@@ -30,4 +30,7 @@
     <li class="list-group-item"><g:link controller="report" action="graficaFacturacionMensual"> <g:message code="facturacion.mensual"/></li></g:link></li>
     <li class="list-group-item group-main"><i class="fa fa-users"></i> <g:message code="clientes.label"/></li>
     <li class="list-group-item"><g:link controller="report" action="listaClientes"> <g:message code="clientes.lista"/></g:link></li>
+    <li class="list-group-item group-main"><i class="fa fa-calendar"></i> <g:message code="citas.label"/></li>
+    <li class="list-group-item"><g:link controller="report" action="listaCitas"> <g:message code="citas.lista.informe"/></g:link></li>
+    <li class="list-group-item"><g:link controller="cita" action="create"> <g:message code="citas.lista"/></g:link></li>
 </ul>

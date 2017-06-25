@@ -47,6 +47,7 @@ class ReportController {
 
     def reportListaClientes(def params){
         def datos = consultasService.listaClientes(params)
+        println datos
         def realPath = servletContext.getRealPath("/reports/MyReports/")
         MainInfo infoGeneral = MainInfo.list().first()
         params.tituloDespacho = infoGeneral.tituloDespacho
@@ -58,6 +59,25 @@ class ReportController {
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JRBeanCollectionDataSource(datos));
         response.contentType = "application/pdf"
         response.setHeader("Content-disposition", "attachment;filename=listaClientes"+"_"+params.orden+".pdf")
+        JasperExportManager.exportReportToPdfStream(jasperPrint,response.getOutputStream());
+    }
+
+    def listaCitas(){}
+
+    def reportListaCitas(def params){
+
+        def datosCitas = consultasService.listaCitas(params)
+        def realPath = servletContext.getRealPath("/reports/MyReports/")
+        MainInfo infoGeneral = MainInfo.list().first()
+        params.tituloDespacho = infoGeneral.tituloDespacho
+        params.nifDespacho = infoGeneral.cif
+        params.emailDespacho = infoGeneral.email
+
+        params.filtro = "\nDesde / Hasta: "+params?.from + "/" + params?.to
+        JasperReport jasperReport = JasperCompileManager.compileReport(realPath+"/lista_citas2.jrxml");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JRBeanCollectionDataSource(datosCitas));
+        response.contentType = "application/pdf"
+        response.setHeader("Content-disposition", "attachment;filename=listaCitas.pdf")
         JasperExportManager.exportReportToPdfStream(jasperPrint,response.getOutputStream());
     }
 

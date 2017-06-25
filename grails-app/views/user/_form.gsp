@@ -68,13 +68,28 @@
                 <hr>
                 <label>Roles</label><br>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="roles" id="ROLE_ADMIN" value="ROLE_ADMIN"> <g:message code="usuario.role.administrador"/>
+                    <g:if test="${actionName == 'edit'}">
+                    <input type="checkbox" name="roles" id="ROLE_ADMIN" value="ROLE_ADMIN" <g:if test="${user.authorities.contains(com.spring.security.Role.findByAuthority("ROLE_ADMIN"))}">checked</g:if>> <g:message code="usuario.role.administrador"/>
+                    </g:if>
+                    <g:else>
+                        <input type="checkbox" name="roles" id="ROLE_ADMIN" value="ROLE_ADMIN"> <g:message code="usuario.role.administrador"/>
+                    </g:else>
                 </label>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="roles" id="ROLE_ABOGADO" value="ROLE_ABOGADO">  <g:message code="usuario.role.abogado"/>
+                    <g:if test="${actionName == 'edit'}">
+                    <input type="checkbox" name="roles" id="ROLE_ABOGADO" value="ROLE_ABOGADO" <g:if test="${user.authorities.contains(com.spring.security.Role.findByAuthority("ROLE_ABOGADO"))}">checked</g:if>>  <g:message code="usuario.role.abogado"/>
+                     </g:if>
+                    <g:else>
+                        <input type="checkbox" name="roles" id="ROLE_ABOGADO" value="ROLE_ABOGADO">  <g:message code="usuario.role.abogado"/>
+                    </g:else>
                 </label>
                 <label class="checkbox-inline">
-                    <input type="checkbox" name="roles" id="ROLE_ADMINISTRATIVO" value="ROLE_ADMINISTRATIVO">  <g:message code="usuario.role.administrativo"/>
+                    <g:if test="${actionName == 'edit'}">
+                    <input type="checkbox" name="roles" id="ROLE_ADMINISTRATIVO" value="ROLE_ADMINISTRATIVO" <g:if test="${user.authorities.contains(com.spring.security.Role.findByAuthority("ROLE_ADMINISTRATIVO"))}">checked</g:if>>  <g:message code="usuario.role.administrativo"/>
+                     </g:if>
+                    <g:else>
+                        <input type="checkbox" name="roles" id="ROLE_ADMINISTRATIVO" value="ROLE_ADMINISTRATIVO">  <g:message code="usuario.role.administrativo"/>
+                    </g:else>
                 </label>
 
             </div>

@@ -53,8 +53,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-word-o" aria-hidden="true"></i> <g:message code="documentos.label"/> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><g:link controller="fichero" action="list"><g:message code="documentos.lista"/></g:link></li>
-                        <li><a href="#">Another action</a></li>
+                        <li><g:link controller="fichero" action="list"><g:message code="documentos.buscar"/></g:link></li>
                     </ul>
                 </li>
                 </sec:ifAnyGranted>
